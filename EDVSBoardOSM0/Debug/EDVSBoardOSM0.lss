@@ -1,0 +1,1084 @@
+
+EDVSBoardOSM0.axf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+1a040000 <g_pfnVectors>:
+1a040000:	00 84 00 20 19 02 04 1a e9 01 04 1a f1 01 04 1a     ... ............
+	...
+1a04002c:	f9 01 04 1a 00 00 00 00 00 00 00 00 01 02 04 1a     ................
+1a04003c:	09 02 04 1a 11 02 04 1a 11 02 04 1a 11 02 04 1a     ................
+1a04004c:	00 00 00 00 11 02 04 1a 11 02 04 1a 11 02 04 1a     ................
+1a04005c:	11 02 04 1a 11 02 04 1a 11 02 04 1a 11 02 04 1a     ................
+1a04006c:	11 02 04 1a 11 02 04 1a 11 02 04 1a 11 02 04 1a     ................
+1a04007c:	11 02 04 1a 11 02 04 1a 11 02 04 1a 11 02 04 1a     ................
+1a04008c:	11 02 04 1a 11 02 04 1a 11 02 04 1a 11 02 04 1a     ................
+1a04009c:	11 02 04 1a 11 02 04 1a 11 02 04 1a 11 02 04 1a     ................
+1a0400ac:	11 02 04 1a 11 02 04 1a 11 02 04 1a 11 02 04 1a     ................
+1a0400bc:	11 02 04 1a                                         ....
+
+1a0400c0 <__data_section_table>:
+1a0400c0:	1a040490 	.word	0x1a040490
+1a0400c4:	20008000 	.word	0x20008000
+1a0400c8:	00000270 	.word	0x00000270
+1a0400cc:	1a040490 	.word	0x1a040490
+1a0400d0:	10086014 	.word	0x10086014
+1a0400d4:	00000000 	.word	0x00000000
+1a0400d8:	1a040490 	.word	0x1a040490
+1a0400dc:	10002014 	.word	0x10002014
+1a0400e0:	00000000 	.word	0x00000000
+1a0400e4:	1a040490 	.word	0x1a040490
+1a0400e8:	10080000 	.word	0x10080000
+1a0400ec:	00000000 	.word	0x00000000
+1a0400f0:	1a040490 	.word	0x1a040490
+1a0400f4:	10000000 	.word	0x10000000
+1a0400f8:	00000000 	.word	0x00000000
+1a0400fc:	1a040490 	.word	0x1a040490
+1a040100:	10086010 	.word	0x10086010
+1a040104:	00000000 	.word	0x00000000
+1a040108:	1a040490 	.word	0x1a040490
+1a04010c:	20000000 	.word	0x20000000
+1a040110:	00000000 	.word	0x00000000
+1a040114:	1a040490 	.word	0x1a040490
+1a040118:	20008400 	.word	0x20008400
+1a04011c:	00000000 	.word	0x00000000
+1a040120:	1a040490 	.word	0x1a040490
+1a040124:	2000c000 	.word	0x2000c000
+1a040128:	00000000 	.word	0x00000000
+
+1a04012c <__bss_section_table>:
+1a04012c:	20008270 	.word	0x20008270
+1a040130:	00000000 	.word	0x00000000
+1a040134:	10086014 	.word	0x10086014
+1a040138:	00000000 	.word	0x00000000
+1a04013c:	10002014 	.word	0x10002014
+1a040140:	00000000 	.word	0x00000000
+1a040144:	10080000 	.word	0x10080000
+1a040148:	00000000 	.word	0x00000000
+1a04014c:	10000000 	.word	0x10000000
+1a040150:	00000000 	.word	0x00000000
+1a040154:	10086010 	.word	0x10086010
+1a040158:	00000000 	.word	0x00000000
+1a04015c:	20000000 	.word	0x20000000
+1a040160:	00000000 	.word	0x00000000
+1a040164:	20008400 	.word	0x20008400
+1a040168:	00000000 	.word	0x00000000
+1a04016c:	2000c000 	.word	0x2000c000
+1a040170:	00000000 	.word	0x00000000
+
+1a040174 <data_init>:
+// are written as separate functions rather than being inlined within the
+// ResetISR() function in order to cope with MCUs with multiple banks of
+// memory.
+//*****************************************************************************
+__attribute__ ((section(".after_vectors")))
+void data_init(unsigned int romstart, unsigned int start, unsigned int len) {
+1a040174:	b580      	push	{r7, lr}
+1a040176:	b088      	sub	sp, #32
+1a040178:	af00      	add	r7, sp, #0
+1a04017a:	60f8      	str	r0, [r7, #12]
+1a04017c:	60b9      	str	r1, [r7, #8]
+1a04017e:	607a      	str	r2, [r7, #4]
+  unsigned int *pulDest = (unsigned int*) start;
+1a040180:	68bb      	ldr	r3, [r7, #8]
+1a040182:	61fb      	str	r3, [r7, #28]
+  unsigned int *pulSrc = (unsigned int*) romstart;
+1a040184:	68fb      	ldr	r3, [r7, #12]
+1a040186:	61bb      	str	r3, [r7, #24]
+  unsigned int loop;
+  for (loop = 0; loop < len; loop = loop + 4)
+1a040188:	2300      	movs	r3, #0
+1a04018a:	617b      	str	r3, [r7, #20]
+1a04018c:	e00a      	b.n	1a0401a4 <data_init+0x30>
+    *pulDest++ = *pulSrc++;
+1a04018e:	69fb      	ldr	r3, [r7, #28]
+1a040190:	1d1a      	adds	r2, r3, #4
+1a040192:	61fa      	str	r2, [r7, #28]
+1a040194:	69ba      	ldr	r2, [r7, #24]
+1a040196:	1d11      	adds	r1, r2, #4
+1a040198:	61b9      	str	r1, [r7, #24]
+1a04019a:	6812      	ldr	r2, [r2, #0]
+1a04019c:	601a      	str	r2, [r3, #0]
+__attribute__ ((section(".after_vectors")))
+void data_init(unsigned int romstart, unsigned int start, unsigned int len) {
+  unsigned int *pulDest = (unsigned int*) start;
+  unsigned int *pulSrc = (unsigned int*) romstart;
+  unsigned int loop;
+  for (loop = 0; loop < len; loop = loop + 4)
+1a04019e:	697b      	ldr	r3, [r7, #20]
+1a0401a0:	3304      	adds	r3, #4
+1a0401a2:	617b      	str	r3, [r7, #20]
+1a0401a4:	697a      	ldr	r2, [r7, #20]
+1a0401a6:	687b      	ldr	r3, [r7, #4]
+1a0401a8:	429a      	cmp	r2, r3
+1a0401aa:	d3f0      	bcc.n	1a04018e <data_init+0x1a>
+    *pulDest++ = *pulSrc++;
+}
+1a0401ac:	46c0      	nop			; (mov r8, r8)
+1a0401ae:	46bd      	mov	sp, r7
+1a0401b0:	b008      	add	sp, #32
+1a0401b2:	bd80      	pop	{r7, pc}
+
+1a0401b4 <bss_init>:
+
+__attribute__ ((section(".after_vectors")))
+void bss_init(unsigned int start, unsigned int len) {
+1a0401b4:	b580      	push	{r7, lr}
+1a0401b6:	b084      	sub	sp, #16
+1a0401b8:	af00      	add	r7, sp, #0
+1a0401ba:	6078      	str	r0, [r7, #4]
+1a0401bc:	6039      	str	r1, [r7, #0]
+  unsigned int *pulDest = (unsigned int*) start;
+1a0401be:	687b      	ldr	r3, [r7, #4]
+1a0401c0:	60fb      	str	r3, [r7, #12]
+  unsigned int loop;
+  for (loop = 0; loop < len; loop = loop + 4)
+1a0401c2:	2300      	movs	r3, #0
+1a0401c4:	60bb      	str	r3, [r7, #8]
+1a0401c6:	e007      	b.n	1a0401d8 <bss_init+0x24>
+    *pulDest++ = 0;
+1a0401c8:	68fb      	ldr	r3, [r7, #12]
+1a0401ca:	1d1a      	adds	r2, r3, #4
+1a0401cc:	60fa      	str	r2, [r7, #12]
+1a0401ce:	2200      	movs	r2, #0
+1a0401d0:	601a      	str	r2, [r3, #0]
+
+__attribute__ ((section(".after_vectors")))
+void bss_init(unsigned int start, unsigned int len) {
+  unsigned int *pulDest = (unsigned int*) start;
+  unsigned int loop;
+  for (loop = 0; loop < len; loop = loop + 4)
+1a0401d2:	68bb      	ldr	r3, [r7, #8]
+1a0401d4:	3304      	adds	r3, #4
+1a0401d6:	60bb      	str	r3, [r7, #8]
+1a0401d8:	68ba      	ldr	r2, [r7, #8]
+1a0401da:	683b      	ldr	r3, [r7, #0]
+1a0401dc:	429a      	cmp	r2, r3
+1a0401de:	d3f3      	bcc.n	1a0401c8 <bss_init+0x14>
+    *pulDest++ = 0;
+}
+1a0401e0:	46c0      	nop			; (mov r8, r8)
+1a0401e2:	46bd      	mov	sp, r7
+1a0401e4:	b004      	add	sp, #16
+1a0401e6:	bd80      	pop	{r7, pc}
+
+1a0401e8 <NMI_Handler>:
+#if defined (__USE_LPCOPEN)
+void NMI_Handler(void)
+#else
+void M0_NMI_Handler(void)
+#endif
+{   while(1) { }
+1a0401e8:	b580      	push	{r7, lr}
+1a0401ea:	af00      	add	r7, sp, #0
+1a0401ec:	e7fe      	b.n	1a0401ec <NMI_Handler+0x4>
+1a0401ee:	46c0      	nop			; (mov r8, r8)
+
+1a0401f0 <HardFault_Handler>:
+#if defined (__USE_LPCOPEN)
+void HardFault_Handler(void)
+#else
+void M0_HardFault_Handler(void)
+#endif
+{   while(1) { }
+1a0401f0:	b580      	push	{r7, lr}
+1a0401f2:	af00      	add	r7, sp, #0
+1a0401f4:	e7fe      	b.n	1a0401f4 <HardFault_Handler+0x4>
+1a0401f6:	46c0      	nop			; (mov r8, r8)
+
+1a0401f8 <SVC_Handler>:
+#if defined (__USE_LPCOPEN)
+void SVC_Handler(void)
+#else
+void M0_SVC_Handler(void)
+#endif
+{   while(1) { }
+1a0401f8:	b580      	push	{r7, lr}
+1a0401fa:	af00      	add	r7, sp, #0
+1a0401fc:	e7fe      	b.n	1a0401fc <SVC_Handler+0x4>
+1a0401fe:	46c0      	nop			; (mov r8, r8)
+
+1a040200 <PendSV_Handler>:
+#if defined (__USE_LPCOPEN)
+void PendSV_Handler(void)
+#else
+void M0_PendSV_Handler(void)
+#endif
+{   while(1) { }
+1a040200:	b580      	push	{r7, lr}
+1a040202:	af00      	add	r7, sp, #0
+1a040204:	e7fe      	b.n	1a040204 <PendSV_Handler+0x4>
+1a040206:	46c0      	nop			; (mov r8, r8)
+
+1a040208 <SysTick_Handler>:
+#if defined (__USE_LPCOPEN)
+void SysTick_Handler(void)
+#else
+void M0_SysTick_Handler(void)
+#endif
+{   while(1) { }
+1a040208:	b580      	push	{r7, lr}
+1a04020a:	af00      	add	r7, sp, #0
+1a04020c:	e7fe      	b.n	1a04020c <SysTick_Handler+0x4>
+1a04020e:	46c0      	nop			; (mov r8, r8)
+
+1a040210 <ADC0_IRQHandler>:
+#if defined (__USE_LPCOPEN)
+void IntDefaultHandler(void)
+#else
+void M0_IntDefaultHandler(void)
+#endif
+{   while(1) { }
+1a040210:	b580      	push	{r7, lr}
+1a040212:	af00      	add	r7, sp, #0
+1a040214:	e7fe      	b.n	1a040214 <ADC0_IRQHandler+0x4>
+1a040216:	46c0      	nop			; (mov r8, r8)
+
+1a040218 <ResetISR>:
+// Sets up a simple runtime environment and initializes the C/C++
+// library.
+//
+//*****************************************************************************
+void
+ResetISR(void) {
+1a040218:	b580      	push	{r7, lr}
+1a04021a:	b086      	sub	sp, #24
+1a04021c:	af00      	add	r7, sp, #0
+  // Modify CREG->M0APPMAP so that M0 looks in correct place
+  // for its vector table when an exception is triggered.
+  // Note that we do not use the CMSIS register access mechanism,
+  // as there is no guarantee that the project has been configured
+  // to use CMSIS.
+  unsigned int *pCREG_M0APPMAP = (unsigned int *) 0x40043404;
+1a04021e:	4b1c      	ldr	r3, [pc, #112]	; (1a040290 <ResetISR+0x78>)
+1a040220:	613b      	str	r3, [r7, #16]
+  // CMSIS : CREG->M0APPMAP = <address of vector table>
+  *pCREG_M0APPMAP = (unsigned int)g_pfnVectors;
+1a040222:	4a1c      	ldr	r2, [pc, #112]	; (1a040294 <ResetISR+0x7c>)
+1a040224:	693b      	ldr	r3, [r7, #16]
+1a040226:	601a      	str	r2, [r3, #0]
+    //
+  unsigned int LoadAddr, ExeAddr, SectionLen;
+  unsigned int *SectionTableAddr;
+
+  // Load base address of Global Section Table
+  SectionTableAddr = &__data_section_table;
+1a040228:	4b1b      	ldr	r3, [pc, #108]	; (1a040298 <ResetISR+0x80>)
+1a04022a:	617b      	str	r3, [r7, #20]
+
+    // Copy the data sections from flash to SRAM.
+  while (SectionTableAddr < &__data_section_table_end) {
+1a04022c:	e014      	b.n	1a040258 <ResetISR+0x40>
+    LoadAddr = *SectionTableAddr++;
+1a04022e:	697b      	ldr	r3, [r7, #20]
+1a040230:	1d1a      	adds	r2, r3, #4
+1a040232:	617a      	str	r2, [r7, #20]
+1a040234:	681b      	ldr	r3, [r3, #0]
+1a040236:	60fb      	str	r3, [r7, #12]
+    ExeAddr = *SectionTableAddr++;
+1a040238:	697b      	ldr	r3, [r7, #20]
+1a04023a:	1d1a      	adds	r2, r3, #4
+1a04023c:	617a      	str	r2, [r7, #20]
+1a04023e:	681b      	ldr	r3, [r3, #0]
+1a040240:	60bb      	str	r3, [r7, #8]
+    SectionLen = *SectionTableAddr++;
+1a040242:	697b      	ldr	r3, [r7, #20]
+1a040244:	1d1a      	adds	r2, r3, #4
+1a040246:	617a      	str	r2, [r7, #20]
+1a040248:	681b      	ldr	r3, [r3, #0]
+1a04024a:	607b      	str	r3, [r7, #4]
+    data_init(LoadAddr, ExeAddr, SectionLen);
+1a04024c:	687a      	ldr	r2, [r7, #4]
+1a04024e:	68b9      	ldr	r1, [r7, #8]
+1a040250:	68fb      	ldr	r3, [r7, #12]
+1a040252:	0018      	movs	r0, r3
+1a040254:	f7ff ff8e 	bl	1a040174 <data_init>
+
+  // Load base address of Global Section Table
+  SectionTableAddr = &__data_section_table;
+
+    // Copy the data sections from flash to SRAM.
+  while (SectionTableAddr < &__data_section_table_end) {
+1a040258:	697a      	ldr	r2, [r7, #20]
+1a04025a:	4b10      	ldr	r3, [pc, #64]	; (1a04029c <ResetISR+0x84>)
+1a04025c:	429a      	cmp	r2, r3
+1a04025e:	d3e6      	bcc.n	1a04022e <ResetISR+0x16>
+    SectionLen = *SectionTableAddr++;
+    data_init(LoadAddr, ExeAddr, SectionLen);
+  }
+  // At this point, SectionTableAddr = &__bss_section_table;
+  // Zero fill the bss segment
+  while (SectionTableAddr < &__bss_section_table_end) {
+1a040260:	e00f      	b.n	1a040282 <ResetISR+0x6a>
+    ExeAddr = *SectionTableAddr++;
+1a040262:	697b      	ldr	r3, [r7, #20]
+1a040264:	1d1a      	adds	r2, r3, #4
+1a040266:	617a      	str	r2, [r7, #20]
+1a040268:	681b      	ldr	r3, [r3, #0]
+1a04026a:	60bb      	str	r3, [r7, #8]
+    SectionLen = *SectionTableAddr++;
+1a04026c:	697b      	ldr	r3, [r7, #20]
+1a04026e:	1d1a      	adds	r2, r3, #4
+1a040270:	617a      	str	r2, [r7, #20]
+1a040272:	681b      	ldr	r3, [r3, #0]
+1a040274:	607b      	str	r3, [r7, #4]
+    bss_init(ExeAddr, SectionLen);
+1a040276:	687a      	ldr	r2, [r7, #4]
+1a040278:	68bb      	ldr	r3, [r7, #8]
+1a04027a:	0011      	movs	r1, r2
+1a04027c:	0018      	movs	r0, r3
+1a04027e:	f7ff ff99 	bl	1a0401b4 <bss_init>
+    SectionLen = *SectionTableAddr++;
+    data_init(LoadAddr, ExeAddr, SectionLen);
+  }
+  // At this point, SectionTableAddr = &__bss_section_table;
+  // Zero fill the bss segment
+  while (SectionTableAddr < &__bss_section_table_end) {
+1a040282:	697a      	ldr	r2, [r7, #20]
+1a040284:	4b06      	ldr	r3, [pc, #24]	; (1a0402a0 <ResetISR+0x88>)
+1a040286:	429a      	cmp	r2, r3
+1a040288:	d3eb      	bcc.n	1a040262 <ResetISR+0x4a>
+
+#if defined (__REDLIB__)
+  // Call the Redlib library, which in turn calls main()
+  __main() ;
+#else
+  main();
+1a04028a:	f000 f8f9 	bl	1a040480 <__main_veneer>
+  //
+  // main() shouldn't return, but if it does, we'll just enter an infinite loop
+  //
+  while (1) {
+    ;
+  }
+1a04028e:	e7fe      	b.n	1a04028e <ResetISR+0x76>
+1a040290:	40043404 	.word	0x40043404
+1a040294:	1a040000 	.word	0x1a040000
+1a040298:	1a0400c0 	.word	0x1a0400c0
+1a04029c:	1a04012c 	.word	0x1a04012c
+1a0402a0:	1a040174 	.word	0x1a040174
+
+1a0402a4 <Chip_GPIO_ReadPortBit>:
+ * @param	pin		: GPIO pin to read
+ * @return	true of the GPIO is high, false if low
+ * @note	It is recommended to use the Chip_GPIO_GetPinState() function instead.
+ */
+STATIC INLINE bool Chip_GPIO_ReadPortBit(LPC_GPIO_T *pGPIO, uint32_t port, uint8_t pin)
+{
+1a0402a4:	b580      	push	{r7, lr}
+1a0402a6:	b084      	sub	sp, #16
+1a0402a8:	af00      	add	r7, sp, #0
+1a0402aa:	60f8      	str	r0, [r7, #12]
+1a0402ac:	60b9      	str	r1, [r7, #8]
+1a0402ae:	1dfb      	adds	r3, r7, #7
+1a0402b0:	701a      	strb	r2, [r3, #0]
+	return (bool) pGPIO->B[port][pin];
+1a0402b2:	1dfb      	adds	r3, r7, #7
+1a0402b4:	781b      	ldrb	r3, [r3, #0]
+1a0402b6:	68f9      	ldr	r1, [r7, #12]
+1a0402b8:	68ba      	ldr	r2, [r7, #8]
+1a0402ba:	0152      	lsls	r2, r2, #5
+1a0402bc:	188a      	adds	r2, r1, r2
+1a0402be:	5cd3      	ldrb	r3, [r2, r3]
+1a0402c0:	b2db      	uxtb	r3, r3
+1a0402c2:	1e5a      	subs	r2, r3, #1
+1a0402c4:	4193      	sbcs	r3, r2
+1a0402c6:	b2db      	uxtb	r3, r3
+}
+1a0402c8:	0018      	movs	r0, r3
+1a0402ca:	46bd      	mov	sp, r7
+1a0402cc:	b004      	add	sp, #16
+1a0402ce:	bd80      	pop	{r7, pc}
+
+1a0402d0 <Chip_GPIO_GetPortValue>:
+ * @param	pGPIO	: The base of GPIO peripheral on the chip
+ * @param	port	: GPIO Port number where @a pin is located
+ * @return	Current (raw) state of all GPIO pins
+ */
+STATIC INLINE uint32_t Chip_GPIO_GetPortValue(LPC_GPIO_T *pGPIO, uint8_t port)
+{
+1a0402d0:	b580      	push	{r7, lr}
+1a0402d2:	b082      	sub	sp, #8
+1a0402d4:	af00      	add	r7, sp, #0
+1a0402d6:	6078      	str	r0, [r7, #4]
+1a0402d8:	000a      	movs	r2, r1
+1a0402da:	1cfb      	adds	r3, r7, #3
+1a0402dc:	701a      	strb	r2, [r3, #0]
+	return pGPIO->PIN[port];
+1a0402de:	1cfb      	adds	r3, r7, #3
+1a0402e0:	781a      	ldrb	r2, [r3, #0]
+1a0402e2:	687b      	ldr	r3, [r7, #4]
+1a0402e4:	2184      	movs	r1, #132	; 0x84
+1a0402e6:	0109      	lsls	r1, r1, #4
+1a0402e8:	468c      	mov	ip, r1
+1a0402ea:	4462      	add	r2, ip
+1a0402ec:	0092      	lsls	r2, r2, #2
+1a0402ee:	58d3      	ldr	r3, [r2, r3]
+}
+1a0402f0:	0018      	movs	r0, r3
+1a0402f2:	46bd      	mov	sp, r7
+1a0402f4:	b002      	add	sp, #8
+1a0402f6:	bd80      	pop	{r7, pc}
+
+1a0402f8 <Chip_GPIO_SetPinOutHigh>:
+ * @return	None
+ * @note	Any bit set as a '0' will not have it's state changed. This only
+ * applies to ports configured as an output.
+ */
+STATIC INLINE void Chip_GPIO_SetPinOutHigh(LPC_GPIO_T *pGPIO, uint8_t port, uint8_t pin)
+{
+1a0402f8:	b580      	push	{r7, lr}
+1a0402fa:	b082      	sub	sp, #8
+1a0402fc:	af00      	add	r7, sp, #0
+1a0402fe:	6078      	str	r0, [r7, #4]
+1a040300:	0008      	movs	r0, r1
+1a040302:	0011      	movs	r1, r2
+1a040304:	1cfb      	adds	r3, r7, #3
+1a040306:	1c02      	adds	r2, r0, #0
+1a040308:	701a      	strb	r2, [r3, #0]
+1a04030a:	1cbb      	adds	r3, r7, #2
+1a04030c:	1c0a      	adds	r2, r1, #0
+1a04030e:	701a      	strb	r2, [r3, #0]
+	pGPIO->SET[port] = (1 << pin);
+1a040310:	1cfb      	adds	r3, r7, #3
+1a040312:	781a      	ldrb	r2, [r3, #0]
+1a040314:	1cbb      	adds	r3, r7, #2
+1a040316:	781b      	ldrb	r3, [r3, #0]
+1a040318:	2101      	movs	r1, #1
+1a04031a:	4099      	lsls	r1, r3
+1a04031c:	000b      	movs	r3, r1
+1a04031e:	0019      	movs	r1, r3
+1a040320:	687b      	ldr	r3, [r7, #4]
+1a040322:	2088      	movs	r0, #136	; 0x88
+1a040324:	0100      	lsls	r0, r0, #4
+1a040326:	4684      	mov	ip, r0
+1a040328:	4462      	add	r2, ip
+1a04032a:	0092      	lsls	r2, r2, #2
+1a04032c:	50d1      	str	r1, [r2, r3]
+}
+1a04032e:	46c0      	nop			; (mov r8, r8)
+1a040330:	46bd      	mov	sp, r7
+1a040332:	b002      	add	sp, #8
+1a040334:	bd80      	pop	{r7, pc}
+1a040336:	46c0      	nop			; (mov r8, r8)
+
+1a040338 <Chip_GPIO_SetPinOutLow>:
+ * @return	None
+ * @note	Any bit set as a '0' will not have it's state changed. This only
+ * applies to ports configured as an output.
+ */
+STATIC INLINE void Chip_GPIO_SetPinOutLow(LPC_GPIO_T *pGPIO, uint8_t port, uint8_t pin)
+{
+1a040338:	b580      	push	{r7, lr}
+1a04033a:	b082      	sub	sp, #8
+1a04033c:	af00      	add	r7, sp, #0
+1a04033e:	6078      	str	r0, [r7, #4]
+1a040340:	0008      	movs	r0, r1
+1a040342:	0011      	movs	r1, r2
+1a040344:	1cfb      	adds	r3, r7, #3
+1a040346:	1c02      	adds	r2, r0, #0
+1a040348:	701a      	strb	r2, [r3, #0]
+1a04034a:	1cbb      	adds	r3, r7, #2
+1a04034c:	1c0a      	adds	r2, r1, #0
+1a04034e:	701a      	strb	r2, [r3, #0]
+	pGPIO->CLR[port] = (1 << pin);
+1a040350:	1cfb      	adds	r3, r7, #3
+1a040352:	781a      	ldrb	r2, [r3, #0]
+1a040354:	1cbb      	adds	r3, r7, #2
+1a040356:	781b      	ldrb	r3, [r3, #0]
+1a040358:	2101      	movs	r1, #1
+1a04035a:	4099      	lsls	r1, r3
+1a04035c:	000b      	movs	r3, r1
+1a04035e:	0019      	movs	r1, r3
+1a040360:	687b      	ldr	r3, [r7, #4]
+1a040362:	208a      	movs	r0, #138	; 0x8a
+1a040364:	0100      	lsls	r0, r0, #4
+1a040366:	4684      	mov	ip, r0
+1a040368:	4462      	add	r2, ip
+1a04036a:	0092      	lsls	r2, r2, #2
+1a04036c:	50d1      	str	r1, [r2, r3]
+}
+1a04036e:	46c0      	nop			; (mov r8, r8)
+1a040370:	46bd      	mov	sp, r7
+1a040372:	b002      	add	sp, #8
+1a040374:	bd80      	pop	{r7, pc}
+1a040376:	46c0      	nop			; (mov r8, r8)
+
+1a040378 <Chip_TIMER_ReadCapture>:
+ * @param	capnum	: Capture register to read
+ * @return	The selected capture register value
+ * @note	Returns the selected capture register value.
+ */
+STATIC INLINE uint32_t Chip_TIMER_ReadCapture(LPC_TIMER_T *pTMR, int8_t capnum)
+{
+1a040378:	b580      	push	{r7, lr}
+1a04037a:	b082      	sub	sp, #8
+1a04037c:	af00      	add	r7, sp, #0
+1a04037e:	6078      	str	r0, [r7, #4]
+1a040380:	000a      	movs	r2, r1
+1a040382:	1cfb      	adds	r3, r7, #3
+1a040384:	701a      	strb	r2, [r3, #0]
+	return pTMR->CR[capnum];
+1a040386:	1cfb      	adds	r3, r7, #3
+1a040388:	781b      	ldrb	r3, [r3, #0]
+1a04038a:	b25b      	sxtb	r3, r3
+1a04038c:	687a      	ldr	r2, [r7, #4]
+1a04038e:	330a      	adds	r3, #10
+1a040390:	009b      	lsls	r3, r3, #2
+1a040392:	18d3      	adds	r3, r2, r3
+1a040394:	3304      	adds	r3, #4
+1a040396:	681b      	ldr	r3, [r3, #0]
+}
+1a040398:	0018      	movs	r0, r3
+1a04039a:	46bd      	mov	sp, r7
+1a04039c:	b002      	add	sp, #8
+1a04039e:	bd80      	pop	{r7, pc}
+
+1a0403a0 <pushByteToReception>:
+static inline void pushByteToTransmission(volatile struct uart_hal * uart, uint8_t byte) {
+	uart->txBuffer[uart->txBufferWritePointer] = byte;
+	uart->txBufferWritePointer = (uart->txBufferWritePointer + 1) & TX_BUFFER_MASK;
+}
+
+static inline void pushByteToReception(volatile struct uart_hal * uart, uint8_t byte) {
+1a0403a0:	b580      	push	{r7, lr}
+1a0403a2:	b082      	sub	sp, #8
+1a0403a4:	af00      	add	r7, sp, #0
+1a0403a6:	6078      	str	r0, [r7, #4]
+1a0403a8:	000a      	movs	r2, r1
+1a0403aa:	1cfb      	adds	r3, r7, #3
+1a0403ac:	701a      	strb	r2, [r3, #0]
+	uart->rxBuffer[uart->rxBufferWritePointer] = byte;
+1a0403ae:	687b      	ldr	r3, [r7, #4]
+1a0403b0:	4a0b      	ldr	r2, [pc, #44]	; (1a0403e0 <pushByteToReception+0x40>)
+1a0403b2:	589a      	ldr	r2, [r3, r2]
+1a0403b4:	6879      	ldr	r1, [r7, #4]
+1a0403b6:	2380      	movs	r3, #128	; 0x80
+1a0403b8:	015b      	lsls	r3, r3, #5
+1a0403ba:	188a      	adds	r2, r1, r2
+1a0403bc:	18d3      	adds	r3, r2, r3
+1a0403be:	1cfa      	adds	r2, r7, #3
+1a0403c0:	7812      	ldrb	r2, [r2, #0]
+1a0403c2:	701a      	strb	r2, [r3, #0]
+	uart->rxBufferWritePointer = (uart->rxBufferWritePointer + 1) & RX_BUFFER_MASK;
+1a0403c4:	687b      	ldr	r3, [r7, #4]
+1a0403c6:	4a06      	ldr	r2, [pc, #24]	; (1a0403e0 <pushByteToReception+0x40>)
+1a0403c8:	589b      	ldr	r3, [r3, r2]
+1a0403ca:	3301      	adds	r3, #1
+1a0403cc:	051b      	lsls	r3, r3, #20
+1a0403ce:	0d1a      	lsrs	r2, r3, #20
+1a0403d0:	687b      	ldr	r3, [r7, #4]
+1a0403d2:	4903      	ldr	r1, [pc, #12]	; (1a0403e0 <pushByteToReception+0x40>)
+1a0403d4:	505a      	str	r2, [r3, r1]
+}
+1a0403d6:	46c0      	nop			; (mov r8, r8)
+1a0403d8:	46bd      	mov	sp, r7
+1a0403da:	b002      	add	sp, #8
+1a0403dc:	bd80      	pop	{r7, pc}
+1a0403de:	46c0      	nop			; (mov r8, r8)
+1a0403e0:	00002008 	.word	0x00002008
+
+1a0403e4 <popByteFromTransmissionBuffer>:
+
+static inline uint8_t popByteFromTransmissionBuffer(volatile struct uart_hal * uart) {
+1a0403e4:	b580      	push	{r7, lr}
+1a0403e6:	b084      	sub	sp, #16
+1a0403e8:	af00      	add	r7, sp, #0
+1a0403ea:	6078      	str	r0, [r7, #4]
+	volatile uint8_t ret = uart->txBuffer[uart->txBufferReadPointer];
+1a0403ec:	687b      	ldr	r3, [r7, #4]
+1a0403ee:	4a0c      	ldr	r2, [pc, #48]	; (1a040420 <popByteFromTransmissionBuffer+0x3c>)
+1a0403f0:	589b      	ldr	r3, [r3, r2]
+1a0403f2:	687a      	ldr	r2, [r7, #4]
+1a0403f4:	5cd3      	ldrb	r3, [r2, r3]
+1a0403f6:	b2da      	uxtb	r2, r3
+1a0403f8:	230f      	movs	r3, #15
+1a0403fa:	18fb      	adds	r3, r7, r3
+1a0403fc:	701a      	strb	r2, [r3, #0]
+	uart->txBufferReadPointer = (uart->txBufferReadPointer + 1) & TX_BUFFER_MASK;
+1a0403fe:	687b      	ldr	r3, [r7, #4]
+1a040400:	4a07      	ldr	r2, [pc, #28]	; (1a040420 <popByteFromTransmissionBuffer+0x3c>)
+1a040402:	589b      	ldr	r3, [r3, r2]
+1a040404:	3301      	adds	r3, #1
+1a040406:	051b      	lsls	r3, r3, #20
+1a040408:	0d1a      	lsrs	r2, r3, #20
+1a04040a:	687b      	ldr	r3, [r7, #4]
+1a04040c:	4904      	ldr	r1, [pc, #16]	; (1a040420 <popByteFromTransmissionBuffer+0x3c>)
+1a04040e:	505a      	str	r2, [r3, r1]
+	return ret;
+1a040410:	230f      	movs	r3, #15
+1a040412:	18fb      	adds	r3, r7, r3
+1a040414:	781b      	ldrb	r3, [r3, #0]
+1a040416:	b2db      	uxtb	r3, r3
+}
+1a040418:	0018      	movs	r0, r3
+1a04041a:	46bd      	mov	sp, r7
+1a04041c:	b004      	add	sp, #16
+1a04041e:	bd80      	pop	{r7, pc}
+1a040420:	00002004 	.word	0x00002004
+
+1a040424 <bytesToSend>:
+static inline uint32_t M4Sleeping(volatile struct uart_hal * uart) {
+	return uart->txSleepingFlag;
+}
+#endif
+
+static inline uint8_t bytesToSend(volatile struct uart_hal * uart) {
+1a040424:	b580      	push	{r7, lr}
+1a040426:	b082      	sub	sp, #8
+1a040428:	af00      	add	r7, sp, #0
+1a04042a:	6078      	str	r0, [r7, #4]
+	return uart->txBufferReadPointer != uart->txBufferWritePointer;
+1a04042c:	687b      	ldr	r3, [r7, #4]
+1a04042e:	4a07      	ldr	r2, [pc, #28]	; (1a04044c <bytesToSend+0x28>)
+1a040430:	589a      	ldr	r2, [r3, r2]
+1a040432:	6879      	ldr	r1, [r7, #4]
+1a040434:	2380      	movs	r3, #128	; 0x80
+1a040436:	019b      	lsls	r3, r3, #6
+1a040438:	58cb      	ldr	r3, [r1, r3]
+1a04043a:	1ad3      	subs	r3, r2, r3
+1a04043c:	1e5a      	subs	r2, r3, #1
+1a04043e:	4193      	sbcs	r3, r2
+1a040440:	b2db      	uxtb	r3, r3
+}
+1a040442:	0018      	movs	r0, r3
+1a040444:	46bd      	mov	sp, r7
+1a040446:	b002      	add	sp, #8
+1a040448:	bd80      	pop	{r7, pc}
+1a04044a:	46c0      	nop			; (mov r8, r8)
+1a04044c:	00002004 	.word	0x00002004
+
+1a040450 <freeSpaceForReception>:
+	volatile uint8_t ret = uart->rxBuffer[uart->rxBufferReadPointer];
+	uart->rxBufferReadPointer = (uart->rxBufferReadPointer + 1) & RX_BUFFER_MASK;
+	return ret;
+}
+
+static inline uint32_t freeSpaceForReception(volatile struct uart_hal * uart) {
+1a040450:	b580      	push	{r7, lr}
+1a040452:	b082      	sub	sp, #8
+1a040454:	af00      	add	r7, sp, #0
+1a040456:	6078      	str	r0, [r7, #4]
+	return (uart->rxBufferReadPointer - uart->rxBufferWritePointer - 1) & RX_BUFFER_MASK;
+1a040458:	687b      	ldr	r3, [r7, #4]
+1a04045a:	4a06      	ldr	r2, [pc, #24]	; (1a040474 <freeSpaceForReception+0x24>)
+1a04045c:	589a      	ldr	r2, [r3, r2]
+1a04045e:	687b      	ldr	r3, [r7, #4]
+1a040460:	4905      	ldr	r1, [pc, #20]	; (1a040478 <freeSpaceForReception+0x28>)
+1a040462:	585b      	ldr	r3, [r3, r1]
+1a040464:	1ad3      	subs	r3, r2, r3
+1a040466:	3b01      	subs	r3, #1
+1a040468:	051b      	lsls	r3, r3, #20
+1a04046a:	0d1b      	lsrs	r3, r3, #20
+}
+1a04046c:	0018      	movs	r0, r3
+1a04046e:	46bd      	mov	sp, r7
+1a040470:	b002      	add	sp, #8
+1a040472:	bd80      	pop	{r7, pc}
+1a040474:	0000200c 	.word	0x0000200c
+1a040478:	00002008 	.word	0x00002008
+1a04047c:	ffffffff 	.word	0xffffffff
+
+1a040480 <__main_veneer>:
+1a040480:	b401      	push	{r0}
+1a040482:	4802      	ldr	r0, [pc, #8]	; (1a04048c <__main_veneer+0xc>)
+1a040484:	4684      	mov	ip, r0
+1a040486:	bc01      	pop	{r0}
+1a040488:	4760      	bx	ip
+1a04048a:	bf00      	nop
+1a04048c:	20008001 	.word	0x20008001
+
+Disassembly of section .data:
+
+20008000 <main>:
+__NOINIT(RAM4) volatile struct eventRingBuffer events;
+__NOINIT(RAM5) volatile struct uart_hal uart;
+__NOINIT(RAM6) volatile uint32_t __core_m0_has_started__;
+
+#define TIMER_EXT_MATCH_2_SET		(1<<2)
+__RAMFUNC(RAM) int main(void) {
+20008000:	b590      	push	{r4, r7, lr}
+20008002:	b089      	sub	sp, #36	; 0x24
+20008004:	af00      	add	r7, sp, #0
+	//The M4 core is in a tight loop waiting for the variable to be set to 1.
+	__core_m0_has_started__ = 1;
+20008006:	4b68      	ldr	r3, [pc, #416]	; (200081a8 <__base_M0CodeRam+0x1a8>)
+20008008:	2201      	movs	r2, #1
+2000800a:	601a      	str	r2, [r3, #0]
+	uint32_t DVSEventPointer;
+	uint32_t DVSEventTime, DVSEventTimeOld;
+	uint16_t DVSEvent;
+	DVSEventTime = DVSEventTimeOld = Chip_TIMER_ReadCapture(LPC_TIMER1, TIMER_CAPTURE_CHANNEL);
+2000800c:	4b67      	ldr	r3, [pc, #412]	; (200081ac <__base_M0CodeRam+0x1ac>)
+2000800e:	2101      	movs	r1, #1
+20008010:	0018      	movs	r0, r3
+20008012:	f000 f8f5 	bl	20008200 <__Chip_TIMER_ReadCapture_veneer>
+20008016:	0003      	movs	r3, r0
+20008018:	61fb      	str	r3, [r7, #28]
+2000801a:	69fb      	ldr	r3, [r7, #28]
+2000801c:	617b      	str	r3, [r7, #20]
+		/**
+		 * An event is fetched by comparing the captured timestamp from the timer
+		 * If there is a new timestamp, the event buffer write pointer is incremented
+		 * and a new event recorded along with its timestamp.
+		 */
+		DVSEventTime = Chip_TIMER_ReadCapture(LPC_TIMER1, TIMER_CAPTURE_CHANNEL);
+2000801e:	4b63      	ldr	r3, [pc, #396]	; (200081ac <__base_M0CodeRam+0x1ac>)
+20008020:	2101      	movs	r1, #1
+20008022:	0018      	movs	r0, r3
+20008024:	f000 f8ec 	bl	20008200 <__Chip_TIMER_ReadCapture_veneer>
+20008028:	0003      	movs	r3, r0
+2000802a:	617b      	str	r3, [r7, #20]
+		if (DVSEventTime != DVSEventTimeOld) {
+2000802c:	697a      	ldr	r2, [r7, #20]
+2000802e:	69fb      	ldr	r3, [r7, #28]
+20008030:	429a      	cmp	r2, r3
+20008032:	d04b      	beq.n	200080cc <main+0xcc>
+			DVSEvent = Chip_GPIO_GetPortValue(LPC_GPIO_PORT, EVENT_PORT) & PIN_ALL_ADDR;
+20008034:	4b5e      	ldr	r3, [pc, #376]	; (200081b0 <__base_M0CodeRam+0x1b0>)
+20008036:	2103      	movs	r1, #3
+20008038:	0018      	movs	r0, r3
+2000803a:	f000 f8f9 	bl	20008230 <__Chip_GPIO_GetPortValue_veneer>
+2000803e:	0003      	movs	r3, r0
+20008040:	b29a      	uxth	r2, r3
+20008042:	230e      	movs	r3, #14
+20008044:	18fb      	adds	r3, r7, r3
+20008046:	0452      	lsls	r2, r2, #17
+20008048:	0c52      	lsrs	r2, r2, #17
+2000804a:	801a      	strh	r2, [r3, #0]
+			events.currentEventRate++;
+2000804c:	4b59      	ldr	r3, [pc, #356]	; (200081b4 <__base_M0CodeRam+0x1b4>)
+2000804e:	4a5a      	ldr	r2, [pc, #360]	; (200081b8 <__base_M0CodeRam+0x1b8>)
+20008050:	589b      	ldr	r3, [r3, r2]
+20008052:	1c5a      	adds	r2, r3, #1
+20008054:	4b57      	ldr	r3, [pc, #348]	; (200081b4 <__base_M0CodeRam+0x1b4>)
+20008056:	4958      	ldr	r1, [pc, #352]	; (200081b8 <__base_M0CodeRam+0x1b8>)
+20008058:	505a      	str	r2, [r3, r1]
+			DVSEventPointer = ((events.eventBufferWritePointer + 1) & DVS_EVENTBUFFER_MASK);
+2000805a:	4b56      	ldr	r3, [pc, #344]	; (200081b4 <__base_M0CodeRam+0x1b4>)
+2000805c:	4a57      	ldr	r2, [pc, #348]	; (200081bc <__base_M0CodeRam+0x1bc>)
+2000805e:	589b      	ldr	r3, [r3, r2]
+20008060:	3301      	adds	r3, #1
+20008062:	051b      	lsls	r3, r3, #20
+20008064:	0d1b      	lsrs	r3, r3, #20
+20008066:	60bb      	str	r3, [r7, #8]
+			int32_t freeSpace = (events.eventBufferReadPointer - DVSEventPointer) & DVS_EVENTBUFFER_MASK;
+20008068:	4b52      	ldr	r3, [pc, #328]	; (200081b4 <__base_M0CodeRam+0x1b4>)
+2000806a:	4a55      	ldr	r2, [pc, #340]	; (200081c0 <__base_M0CodeRam+0x1c0>)
+2000806c:	589a      	ldr	r2, [r3, r2]
+2000806e:	68bb      	ldr	r3, [r7, #8]
+20008070:	1ad3      	subs	r3, r2, r3
+20008072:	051b      	lsls	r3, r3, #20
+20008074:	0d1b      	lsrs	r3, r3, #20
+20008076:	607b      	str	r3, [r7, #4]
+			if (freeSpace < 4) {
+20008078:	687b      	ldr	r3, [r7, #4]
+2000807a:	2b03      	cmp	r3, #3
+2000807c:	dc10      	bgt.n	200080a0 <main+0xa0>
+				while (events.ringBufferLock) {
+2000807e:	e000      	b.n	20008082 <main+0x82>
+
+    No Operation does nothing. This instruction can be used for code alignment purposes.
+ */
+__attribute__( ( always_inline ) ) __STATIC_INLINE void __NOP(void)
+{
+  __ASM volatile ("nop");
+20008080:	46c0      	nop			; (mov r8, r8)
+20008082:	4a4c      	ldr	r2, [pc, #304]	; (200081b4 <__base_M0CodeRam+0x1b4>)
+20008084:	23c0      	movs	r3, #192	; 0xc0
+20008086:	01db      	lsls	r3, r3, #7
+20008088:	58d3      	ldr	r3, [r2, r3]
+2000808a:	2b00      	cmp	r3, #0
+2000808c:	d1f8      	bne.n	20008080 <main+0x80>
+					__NOP(); //Wait for the M4 to finish with the queue
+				}
+				events.eventBufferReadPointer = ((events.eventBufferReadPointer + 1) & DVS_EVENTBUFFER_MASK);
+2000808e:	4b49      	ldr	r3, [pc, #292]	; (200081b4 <__base_M0CodeRam+0x1b4>)
+20008090:	4a4b      	ldr	r2, [pc, #300]	; (200081c0 <__base_M0CodeRam+0x1c0>)
+20008092:	589b      	ldr	r3, [r3, r2]
+20008094:	3301      	adds	r3, #1
+20008096:	051b      	lsls	r3, r3, #20
+20008098:	0d1a      	lsrs	r2, r3, #20
+2000809a:	4b46      	ldr	r3, [pc, #280]	; (200081b4 <__base_M0CodeRam+0x1b4>)
+2000809c:	4948      	ldr	r1, [pc, #288]	; (200081c0 <__base_M0CodeRam+0x1c0>)
+2000809e:	505a      	str	r2, [r3, r1]
+			}
+			events.eventBufferA[DVSEventPointer] = DVSEvent; // store event
+200080a0:	4b44      	ldr	r3, [pc, #272]	; (200081b4 <__base_M0CodeRam+0x1b4>)
+200080a2:	68ba      	ldr	r2, [r7, #8]
+200080a4:	2180      	movs	r1, #128	; 0x80
+200080a6:	0189      	lsls	r1, r1, #6
+200080a8:	468c      	mov	ip, r1
+200080aa:	4462      	add	r2, ip
+200080ac:	0052      	lsls	r2, r2, #1
+200080ae:	210e      	movs	r1, #14
+200080b0:	1879      	adds	r1, r7, r1
+200080b2:	8809      	ldrh	r1, [r1, #0]
+200080b4:	52d1      	strh	r1, [r2, r3]
+			events.eventBufferTimeLow[DVSEventPointer] = DVSEventTime; // store event time
+200080b6:	4b3f      	ldr	r3, [pc, #252]	; (200081b4 <__base_M0CodeRam+0x1b4>)
+200080b8:	68ba      	ldr	r2, [r7, #8]
+200080ba:	0092      	lsls	r2, r2, #2
+200080bc:	6979      	ldr	r1, [r7, #20]
+200080be:	50d1      	str	r1, [r2, r3]
+			events.eventBufferWritePointer = DVSEventPointer; // Only update the write pointer after being finished with the write operation
+200080c0:	4b3c      	ldr	r3, [pc, #240]	; (200081b4 <__base_M0CodeRam+0x1b4>)
+200080c2:	493e      	ldr	r1, [pc, #248]	; (200081bc <__base_M0CodeRam+0x1bc>)
+200080c4:	68ba      	ldr	r2, [r7, #8]
+200080c6:	505a      	str	r2, [r3, r1]
+			DVSEventTimeOld = DVSEventTime;
+200080c8:	697b      	ldr	r3, [r7, #20]
+200080ca:	61fb      	str	r3, [r7, #28]
+		/*
+		 * UART1 should handle CTs and RTS in hardware
+		 * TODO: this is an open issue
+		 */
+#if UART_PORT_DEFAULT == 0
+		if (Chip_GPIO_ReadPortBit(LPC_GPIO_PORT, CTS0_GPIO_PORT, CTS0_GPIO_PIN) == 0
+200080cc:	4b38      	ldr	r3, [pc, #224]	; (200081b0 <__base_M0CodeRam+0x1b0>)
+200080ce:	2208      	movs	r2, #8
+200080d0:	2101      	movs	r1, #1
+200080d2:	0018      	movs	r0, r3
+200080d4:	f000 f8a4 	bl	20008220 <__Chip_GPIO_ReadPortBit_veneer>
+200080d8:	0003      	movs	r3, r0
+200080da:	001a      	movs	r2, r3
+200080dc:	2301      	movs	r3, #1
+200080de:	4053      	eors	r3, r2
+200080e0:	b2db      	uxtb	r3, r3
+200080e2:	2b00      	cmp	r3, #0
+200080e4:	d01a      	beq.n	2000811c <main+0x11c>
+				&& (LPC_UART->LSR & UART_LSR_THRE)) { // no rts stop signal
+200080e6:	4b37      	ldr	r3, [pc, #220]	; (200081c4 <__base_M0CodeRam+0x1c4>)
+200080e8:	695b      	ldr	r3, [r3, #20]
+200080ea:	2220      	movs	r2, #32
+200080ec:	4013      	ands	r3, r2
+200080ee:	d015      	beq.n	2000811c <main+0x11c>
+#endif
+			int i = 15; //Use the TX FIFO
+200080f0:	230f      	movs	r3, #15
+200080f2:	61bb      	str	r3, [r7, #24]
+			while (bytesToSend(&uart) && i) {
+200080f4:	e009      	b.n	2000810a <main+0x10a>
+				LPC_UART->THR = popByteFromTransmissionBuffer(&uart);
+200080f6:	4c33      	ldr	r4, [pc, #204]	; (200081c4 <__base_M0CodeRam+0x1c4>)
+200080f8:	4b33      	ldr	r3, [pc, #204]	; (200081c8 <__base_M0CodeRam+0x1c8>)
+200080fa:	0018      	movs	r0, r3
+200080fc:	f000 f8b0 	bl	20008260 <__popByteFromTransmissionBuffer_veneer>
+20008100:	0003      	movs	r3, r0
+20008102:	6023      	str	r3, [r4, #0]
+				--i;
+20008104:	69bb      	ldr	r3, [r7, #24]
+20008106:	3b01      	subs	r3, #1
+20008108:	61bb      	str	r3, [r7, #24]
+#if UART_PORT_DEFAULT == 0
+		if (Chip_GPIO_ReadPortBit(LPC_GPIO_PORT, CTS0_GPIO_PORT, CTS0_GPIO_PIN) == 0
+				&& (LPC_UART->LSR & UART_LSR_THRE)) { // no rts stop signal
+#endif
+			int i = 15; //Use the TX FIFO
+			while (bytesToSend(&uart) && i) {
+2000810a:	4b2f      	ldr	r3, [pc, #188]	; (200081c8 <__base_M0CodeRam+0x1c8>)
+2000810c:	0018      	movs	r0, r3
+2000810e:	f000 f89f 	bl	20008250 <__bytesToSend_veneer>
+20008112:	1e03      	subs	r3, r0, #0
+20008114:	d002      	beq.n	2000811c <main+0x11c>
+20008116:	69bb      	ldr	r3, [r7, #24]
+20008118:	2b00      	cmp	r3, #0
+2000811a:	d1ec      	bne.n	200080f6 <main+0xf6>
+#endif
+#if UART_PORT_DEFAULT == 0
+		}
+#endif
+
+		if ( LPC_UART->LSR & UART_LSR_RDR) {
+2000811c:	4b29      	ldr	r3, [pc, #164]	; (200081c4 <__base_M0CodeRam+0x1c4>)
+2000811e:	695b      	ldr	r3, [r3, #20]
+20008120:	2201      	movs	r2, #1
+20008122:	4013      	ands	r3, r2
+20008124:	d026      	beq.n	20008174 <main+0x174>
+			uint32_t freeSpace = freeSpaceForReception(&uart);
+20008126:	4b28      	ldr	r3, [pc, #160]	; (200081c8 <__base_M0CodeRam+0x1c8>)
+20008128:	0018      	movs	r0, r3
+2000812a:	f000 f859 	bl	200081e0 <__freeSpaceForReception_veneer>
+2000812e:	0003      	movs	r3, r0
+20008130:	613b      	str	r3, [r7, #16]
+			//We leave the character in the UART buffer
+			if (freeSpace > 0) {
+20008132:	693b      	ldr	r3, [r7, #16]
+20008134:	2b00      	cmp	r3, #0
+20008136:	d01d      	beq.n	20008174 <main+0x174>
+				pushByteToReception(&uart, LPC_UART->RBR);
+20008138:	4b22      	ldr	r3, [pc, #136]	; (200081c4 <__base_M0CodeRam+0x1c4>)
+2000813a:	681b      	ldr	r3, [r3, #0]
+2000813c:	b2da      	uxtb	r2, r3
+2000813e:	4b22      	ldr	r3, [pc, #136]	; (200081c8 <__base_M0CodeRam+0x1c8>)
+20008140:	0011      	movs	r1, r2
+20008142:	0018      	movs	r0, r3
+20008144:	f000 f87c 	bl	20008240 <__pushByteToReception_veneer>
+				if (freeSpace <= RX_WARNING) {
+20008148:	693b      	ldr	r3, [r7, #16]
+2000814a:	2b80      	cmp	r3, #128	; 0x80
+2000814c:	d80c      	bhi.n	20008168 <main+0x168>
+					//If we get to here the M4 is taking too much time to parse the input
+					Chip_GPIO_SetPinOutHigh(LPC_GPIO_PORT, RTS0_GPIO_PORT, RTS0_GPIO_PIN); //Signal busy to the DTE
+2000814e:	4b18      	ldr	r3, [pc, #96]	; (200081b0 <__base_M0CodeRam+0x1b0>)
+20008150:	220a      	movs	r2, #10
+20008152:	2100      	movs	r1, #0
+20008154:	0018      	movs	r0, r3
+20008156:	f000 f85b 	bl	20008210 <__Chip_GPIO_SetPinOutHigh_veneer>
+					Chip_GPIO_SetPinOutLow(LPC_GPIO_PORT, LED1_PORT_GPIO, LED1_PIN_GPIO); //Turn on the LED
+2000815a:	4b15      	ldr	r3, [pc, #84]	; (200081b0 <__base_M0CodeRam+0x1b0>)
+2000815c:	2201      	movs	r2, #1
+2000815e:	2100      	movs	r1, #0
+20008160:	0018      	movs	r0, r3
+20008162:	f000 f845 	bl	200081f0 <__Chip_GPIO_SetPinOutLow_veneer>
+20008166:	e005      	b.n	20008174 <main+0x174>
+				} else {
+					Chip_GPIO_SetPinOutLow(LPC_GPIO_PORT, RTS0_GPIO_PORT, RTS0_GPIO_PIN); //Signal ready to the DTE
+20008168:	4b11      	ldr	r3, [pc, #68]	; (200081b0 <__base_M0CodeRam+0x1b0>)
+2000816a:	220a      	movs	r2, #10
+2000816c:	2100      	movs	r1, #0
+2000816e:	0018      	movs	r0, r3
+20008170:	f000 f83e 	bl	200081f0 <__Chip_GPIO_SetPinOutLow_veneer>
+		 * The match 2 channel of each channels is used for setting the timer period
+		 * and when it resets, it sets the external match bit.
+		 * This core is checking for this bit and it sets the two output channels to high
+		 * while keeping the default configuration of the external match actions.
+		 */
+		if ( LPC_TIMER0->EMR & TIMER_EXT_MATCH_2_SET) {
+20008174:	4b15      	ldr	r3, [pc, #84]	; (200081cc <__base_M0CodeRam+0x1cc>)
+20008176:	6bdb      	ldr	r3, [r3, #60]	; 0x3c
+20008178:	2204      	movs	r2, #4
+2000817a:	4013      	ands	r3, r2
+2000817c:	d002      	beq.n	20008184 <main+0x184>
+			//The timer0 is using channels 0 and 3 for the outputs.
+			LPC_TIMER0->EMR = (((uint32_t) 9) << 0) | (((uint32_t) TIMER_EXTMATCH_CLEAR) << 4)
+2000817e:	4b13      	ldr	r3, [pc, #76]	; (200081cc <__base_M0CodeRam+0x1cc>)
+20008180:	4a13      	ldr	r2, [pc, #76]	; (200081d0 <__base_M0CodeRam+0x1d0>)
+20008182:	63da      	str	r2, [r3, #60]	; 0x3c
+					| (((uint32_t) TIMER_EXTMATCH_SET) << 8) | (((uint32_t) TIMER_EXTMATCH_CLEAR) << 10);
+		}
+		if ( LPC_TIMER2->EMR & TIMER_EXT_MATCH_2_SET) {
+20008184:	4b13      	ldr	r3, [pc, #76]	; (200081d4 <__base_M0CodeRam+0x1d4>)
+20008186:	6bdb      	ldr	r3, [r3, #60]	; 0x3c
+20008188:	2204      	movs	r2, #4
+2000818a:	4013      	ands	r3, r2
+2000818c:	d002      	beq.n	20008194 <main+0x194>
+			//The timer2 is using channels 0 and 1 for the outputs.
+			LPC_TIMER2->EMR = (((uint32_t) 3) << 0) | (((uint32_t) TIMER_EXTMATCH_CLEAR) << 4)
+2000818e:	4b11      	ldr	r3, [pc, #68]	; (200081d4 <__base_M0CodeRam+0x1d4>)
+20008190:	4a11      	ldr	r2, [pc, #68]	; (200081d8 <__base_M0CodeRam+0x1d8>)
+20008192:	63da      	str	r2, [r3, #60]	; 0x3c
+					| (((uint32_t) TIMER_EXTMATCH_CLEAR) << 6) | (((uint32_t) TIMER_EXTMATCH_SET) << 8);
+		}
+		if ( LPC_TIMER3->EMR & TIMER_EXT_MATCH_2_SET) {
+20008194:	4b11      	ldr	r3, [pc, #68]	; (200081dc <__base_M0CodeRam+0x1dc>)
+20008196:	6bdb      	ldr	r3, [r3, #60]	; 0x3c
+20008198:	2204      	movs	r2, #4
+2000819a:	4013      	ands	r3, r2
+2000819c:	d100      	bne.n	200081a0 <main+0x1a0>
+2000819e:	e73e      	b.n	2000801e <main+0x1e>
+			//The timer3 is using channels 0 and 1 for the outputs.
+			LPC_TIMER3->EMR = (((uint32_t) 3) << 0) | (((uint32_t) TIMER_EXTMATCH_CLEAR) << 4)
+200081a0:	4b0e      	ldr	r3, [pc, #56]	; (200081dc <__base_M0CodeRam+0x1dc>)
+200081a2:	4a0d      	ldr	r2, [pc, #52]	; (200081d8 <__base_M0CodeRam+0x1d8>)
+200081a4:	63da      	str	r2, [r3, #60]	; 0x3c
+					| (((uint32_t) TIMER_EXTMATCH_CLEAR) << 6) | (((uint32_t) TIMER_EXTMATCH_SET) << 8);
+		}
+	}
+200081a6:	e73a      	b.n	2000801e <main+0x1e>
+200081a8:	10086010 	.word	0x10086010
+200081ac:	40085000 	.word	0x40085000
+200081b0:	400f4000 	.word	0x400f4000
+200081b4:	10080000 	.word	0x10080000
+200081b8:	0000600c 	.word	0x0000600c
+200081bc:	00006004 	.word	0x00006004
+200081c0:	00006008 	.word	0x00006008
+200081c4:	40081000 	.word	0x40081000
+200081c8:	10000000 	.word	0x10000000
+200081cc:	40084000 	.word	0x40084000
+200081d0:	00000619 	.word	0x00000619
+200081d4:	400c3000 	.word	0x400c3000
+200081d8:	00000253 	.word	0x00000253
+200081dc:	400c4000 	.word	0x400c4000
+
+200081e0 <__freeSpaceForReception_veneer>:
+200081e0:	b401      	push	{r0}
+200081e2:	4802      	ldr	r0, [pc, #8]	; (200081ec <__freeSpaceForReception_veneer+0xc>)
+200081e4:	4684      	mov	ip, r0
+200081e6:	bc01      	pop	{r0}
+200081e8:	4760      	bx	ip
+200081ea:	bf00      	nop
+200081ec:	1a040451 	.word	0x1a040451
+
+200081f0 <__Chip_GPIO_SetPinOutLow_veneer>:
+200081f0:	b401      	push	{r0}
+200081f2:	4802      	ldr	r0, [pc, #8]	; (200081fc <__Chip_GPIO_SetPinOutLow_veneer+0xc>)
+200081f4:	4684      	mov	ip, r0
+200081f6:	bc01      	pop	{r0}
+200081f8:	4760      	bx	ip
+200081fa:	bf00      	nop
+200081fc:	1a040339 	.word	0x1a040339
+
+20008200 <__Chip_TIMER_ReadCapture_veneer>:
+20008200:	b401      	push	{r0}
+20008202:	4802      	ldr	r0, [pc, #8]	; (2000820c <__Chip_TIMER_ReadCapture_veneer+0xc>)
+20008204:	4684      	mov	ip, r0
+20008206:	bc01      	pop	{r0}
+20008208:	4760      	bx	ip
+2000820a:	bf00      	nop
+2000820c:	1a040379 	.word	0x1a040379
+
+20008210 <__Chip_GPIO_SetPinOutHigh_veneer>:
+20008210:	b401      	push	{r0}
+20008212:	4802      	ldr	r0, [pc, #8]	; (2000821c <__Chip_GPIO_SetPinOutHigh_veneer+0xc>)
+20008214:	4684      	mov	ip, r0
+20008216:	bc01      	pop	{r0}
+20008218:	4760      	bx	ip
+2000821a:	bf00      	nop
+2000821c:	1a0402f9 	.word	0x1a0402f9
+
+20008220 <__Chip_GPIO_ReadPortBit_veneer>:
+20008220:	b401      	push	{r0}
+20008222:	4802      	ldr	r0, [pc, #8]	; (2000822c <__Chip_GPIO_ReadPortBit_veneer+0xc>)
+20008224:	4684      	mov	ip, r0
+20008226:	bc01      	pop	{r0}
+20008228:	4760      	bx	ip
+2000822a:	bf00      	nop
+2000822c:	1a0402a5 	.word	0x1a0402a5
+
+20008230 <__Chip_GPIO_GetPortValue_veneer>:
+20008230:	b401      	push	{r0}
+20008232:	4802      	ldr	r0, [pc, #8]	; (2000823c <__Chip_GPIO_GetPortValue_veneer+0xc>)
+20008234:	4684      	mov	ip, r0
+20008236:	bc01      	pop	{r0}
+20008238:	4760      	bx	ip
+2000823a:	bf00      	nop
+2000823c:	1a0402d1 	.word	0x1a0402d1
+
+20008240 <__pushByteToReception_veneer>:
+20008240:	b401      	push	{r0}
+20008242:	4802      	ldr	r0, [pc, #8]	; (2000824c <__pushByteToReception_veneer+0xc>)
+20008244:	4684      	mov	ip, r0
+20008246:	bc01      	pop	{r0}
+20008248:	4760      	bx	ip
+2000824a:	bf00      	nop
+2000824c:	1a0403a1 	.word	0x1a0403a1
+
+20008250 <__bytesToSend_veneer>:
+20008250:	b401      	push	{r0}
+20008252:	4802      	ldr	r0, [pc, #8]	; (2000825c <__bytesToSend_veneer+0xc>)
+20008254:	4684      	mov	ip, r0
+20008256:	bc01      	pop	{r0}
+20008258:	4760      	bx	ip
+2000825a:	bf00      	nop
+2000825c:	1a040425 	.word	0x1a040425
+
+20008260 <__popByteFromTransmissionBuffer_veneer>:
+20008260:	b401      	push	{r0}
+20008262:	4802      	ldr	r0, [pc, #8]	; (2000826c <__popByteFromTransmissionBuffer_veneer+0xc>)
+20008264:	4684      	mov	ip, r0
+20008266:	bc01      	pop	{r0}
+20008268:	4760      	bx	ip
+2000826a:	bf00      	nop
+2000826c:	1a0403e5 	.word	0x1a0403e5

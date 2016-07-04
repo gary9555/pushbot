@@ -1,0 +1,655 @@
+
+Discarded input sections
+
+ .group         0x00000000        0x8 ./src/cr_startup_lpc43xx_m0app.o
+ .text          0x00000000        0x0 ./src/cr_startup_lpc43xx_m0app.o
+ .data          0x00000000        0x0 ./src/cr_startup_lpc43xx_m0app.o
+ .bss           0x00000000        0x0 ./src/cr_startup_lpc43xx_m0app.o
+ .group         0x00000000        0x8 ./src/crp.o
+ .group         0x00000000        0x8 ./src/crp.o
+ .text          0x00000000        0x0 ./src/crp.o
+ .data          0x00000000        0x0 ./src/crp.o
+ .bss           0x00000000        0x0 ./src/crp.o
+ .crp           0x00000000        0x4 ./src/crp.o
+ .debug_info    0x00000000       0x3f ./src/crp.o
+ .debug_abbrev  0x00000000       0x36 ./src/crp.o
+ .debug_aranges
+                0x00000000       0x18 ./src/crp.o
+ .debug_macro   0x00000000       0x1a ./src/crp.o
+ .debug_macro   0x00000000      0x844 ./src/crp.o
+ .debug_macro   0x00000000       0x34 ./src/crp.o
+ .debug_line    0x00000000       0x81 ./src/crp.o
+ .debug_str     0x00000000     0x246d ./src/crp.o
+ .comment       0x00000000       0x6f ./src/crp.o
+ .ARM.attributes
+                0x00000000       0x31 ./src/crp.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
+ .text          0x00000000        0x0 ./src/main.o
+ .data          0x00000000        0x0 ./src/main.o
+ .bss           0x00000000        0x0 ./src/main.o
+ .debug_macro   0x00000000      0x844 ./src/main.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+MFlashA512_256   0x1a040000         0x00040000         xr
+MFlashA512       0x1a000000         0x00040000         xr
+MFlashB512       0x1b000000         0x00080000         xr
+M0CodeRam        0x20008000         0x00000400         xrw
+RamLoc40         0x10086014         0x00003fec         xrw
+RamLoc32         0x10002014         0x00005fec         xrw
+EventsBuffer32   0x10080000         0x00006010         xrw
+UartBuffer       0x10000000         0x00002014         xrw
+M0Start          0x10086010         0x00000004         xrw
+RamAHB32         0x20000000         0x00008000         xrw
+RamAHB16         0x20008400         0x00003c00         xrw
+RamAHB_ETB16     0x2000c000         0x00004000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD ./src/cr_startup_lpc43xx_m0app.o
+LOAD ./src/crp.o
+LOAD ./src/main.o
+START GROUP
+LOAD /usr/local/lpcxpresso_8.1.4_606/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a
+LOAD /usr/local/lpcxpresso_8.1.4_606/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc.a
+LOAD /usr/local/lpcxpresso_8.1.4_606/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libm.a
+END GROUP
+                0x1a040000                __base_MFlashA512_256 = 0x1a040000
+                0x1a040000                __base_Flash = 0x1a040000
+                0x1a080000                __top_MFlashA512_256 = 0x1a080000
+                0x1a080000                __top_Flash = 0x1a080000
+                0x1a000000                __base_MFlashA512 = 0x1a000000
+                0x1a000000                __base_Flash2 = 0x1a000000
+                0x1a040000                __top_MFlashA512 = 0x1a040000
+                0x1a040000                __top_Flash2 = 0x1a040000
+                0x1b000000                __base_MFlashB512 = 0x1b000000
+                0x1b000000                __base_Flash3 = 0x1b000000
+                0x1b080000                __top_MFlashB512 = 0x1b080000
+                0x1b080000                __top_Flash3 = 0x1b080000
+                0x20008000                __base_M0CodeRam = 0x20008000
+                0x20008000                __base_RAM = 0x20008000
+                0x20008400                __top_M0CodeRam = 0x20008400
+                0x20008400                __top_RAM = 0x20008400
+                0x10086014                __base_RamLoc40 = 0x10086014
+                0x10086014                __base_RAM2 = 0x10086014
+                0x1008a000                __top_RamLoc40 = 0x1008a000
+                0x1008a000                __top_RAM2 = 0x1008a000
+                0x10002014                __base_RamLoc32 = 0x10002014
+                0x10002014                __base_RAM3 = 0x10002014
+                0x10008000                __top_RamLoc32 = 0x10008000
+                0x10008000                __top_RAM3 = 0x10008000
+                0x10080000                __base_EventsBuffer32 = 0x10080000
+                0x10080000                __base_RAM4 = 0x10080000
+                0x10086010                __top_EventsBuffer32 = 0x10086010
+                0x10086010                __top_RAM4 = 0x10086010
+                0x10000000                __base_UartBuffer = 0x10000000
+                0x10000000                __base_RAM5 = 0x10000000
+                0x10002014                __top_UartBuffer = 0x10002014
+                0x10002014                __top_RAM5 = 0x10002014
+                0x10086010                __base_M0Start = 0x10086010
+                0x10086010                __base_RAM6 = 0x10086010
+                0x10086014                __top_M0Start = 0x10086014
+                0x10086014                __top_RAM6 = 0x10086014
+                0x20000000                __base_RamAHB32 = 0x20000000
+                0x20000000                __base_RAM7 = 0x20000000
+                0x20008000                __top_RamAHB32 = 0x20008000
+                0x20008000                __top_RAM7 = 0x20008000
+                0x20008400                __base_RamAHB16 = 0x20008400
+                0x20008400                __base_RAM8 = 0x20008400
+                0x2000c000                __top_RamAHB16 = 0x2000c000
+                0x2000c000                __top_RAM8 = 0x2000c000
+                0x2000c000                __base_RamAHB_ETB16 = 0x2000c000
+                0x2000c000                __base_RAM9 = 0x2000c000
+                0x20010000                __top_RamAHB_ETB16 = 0x20010000
+                0x20010000                __top_RAM9 = 0x20010000
+
+.text_Flash2    0x1a000000        0x0
+ FILL mask 0xff
+ *(.text_Flash2*)
+ *(.text_MFlashA512*)
+ *(.text.$Flash2*)
+ *(.text.$MFlashA512*)
+ *(.rodata.$Flash2*)
+ *(.rodata.$MFlashA512*)
+
+.text_Flash3    0x1b000000        0x0
+ FILL mask 0xff
+ *(.text_Flash3*)
+ *(.text_MFlashB512*)
+ *(.text.$Flash3*)
+ *(.text.$MFlashB512*)
+ *(.rodata.$Flash3*)
+ *(.rodata.$MFlashB512*)
+
+.text           0x1a040000      0x490
+ FILL mask 0xff
+                0x1a040000                __vectors_start__ = ABSOLUTE (.)
+ *(.isr_vector)
+ .isr_vector    0x1a040000       0xc0 ./src/cr_startup_lpc43xx_m0app.o
+                0x1a040000                g_pfnVectors
+                0x1a0400c0                . = ALIGN (0x4)
+                0x1a0400c0                __section_table_start = .
+                0x1a0400c0                __data_section_table = .
+                0x1a0400c0        0x4 LONG 0x1a040490 LOADADDR (.data)
+                0x1a0400c4        0x4 LONG 0x20008000 ADDR (.data)
+                0x1a0400c8        0x4 LONG 0x270 SIZEOF (.data)
+                0x1a0400cc        0x4 LONG 0x1a040490 LOADADDR (.data_RAM2)
+                0x1a0400d0        0x4 LONG 0x10086014 ADDR (.data_RAM2)
+                0x1a0400d4        0x4 LONG 0x0 SIZEOF (.data_RAM2)
+                0x1a0400d8        0x4 LONG 0x1a040490 LOADADDR (.data_RAM3)
+                0x1a0400dc        0x4 LONG 0x10002014 ADDR (.data_RAM3)
+                0x1a0400e0        0x4 LONG 0x0 SIZEOF (.data_RAM3)
+                0x1a0400e4        0x4 LONG 0x1a040490 LOADADDR (.data_RAM4)
+                0x1a0400e8        0x4 LONG 0x10080000 ADDR (.data_RAM4)
+                0x1a0400ec        0x4 LONG 0x0 SIZEOF (.data_RAM4)
+                0x1a0400f0        0x4 LONG 0x1a040490 LOADADDR (.data_RAM5)
+                0x1a0400f4        0x4 LONG 0x10000000 ADDR (.data_RAM5)
+                0x1a0400f8        0x4 LONG 0x0 SIZEOF (.data_RAM5)
+                0x1a0400fc        0x4 LONG 0x1a040490 LOADADDR (.data_RAM6)
+                0x1a040100        0x4 LONG 0x10086010 ADDR (.data_RAM6)
+                0x1a040104        0x4 LONG 0x0 SIZEOF (.data_RAM6)
+                0x1a040108        0x4 LONG 0x1a040490 LOADADDR (.data_RAM7)
+                0x1a04010c        0x4 LONG 0x20000000 ADDR (.data_RAM7)
+                0x1a040110        0x4 LONG 0x0 SIZEOF (.data_RAM7)
+                0x1a040114        0x4 LONG 0x1a040490 LOADADDR (.data_RAM8)
+                0x1a040118        0x4 LONG 0x20008400 ADDR (.data_RAM8)
+                0x1a04011c        0x4 LONG 0x0 SIZEOF (.data_RAM8)
+                0x1a040120        0x4 LONG 0x1a040490 LOADADDR (.data_RAM9)
+                0x1a040124        0x4 LONG 0x2000c000 ADDR (.data_RAM9)
+                0x1a040128        0x4 LONG 0x0 SIZEOF (.data_RAM9)
+                0x1a04012c                __data_section_table_end = .
+                0x1a04012c                __bss_section_table = .
+                0x1a04012c        0x4 LONG 0x20008270 ADDR (.bss)
+                0x1a040130        0x4 LONG 0x0 SIZEOF (.bss)
+                0x1a040134        0x4 LONG 0x10086014 ADDR (.bss_RAM2)
+                0x1a040138        0x4 LONG 0x0 SIZEOF (.bss_RAM2)
+                0x1a04013c        0x4 LONG 0x10002014 ADDR (.bss_RAM3)
+                0x1a040140        0x4 LONG 0x0 SIZEOF (.bss_RAM3)
+                0x1a040144        0x4 LONG 0x10080000 ADDR (.bss_RAM4)
+                0x1a040148        0x4 LONG 0x0 SIZEOF (.bss_RAM4)
+                0x1a04014c        0x4 LONG 0x10000000 ADDR (.bss_RAM5)
+                0x1a040150        0x4 LONG 0x0 SIZEOF (.bss_RAM5)
+                0x1a040154        0x4 LONG 0x10086010 ADDR (.bss_RAM6)
+                0x1a040158        0x4 LONG 0x0 SIZEOF (.bss_RAM6)
+                0x1a04015c        0x4 LONG 0x20000000 ADDR (.bss_RAM7)
+                0x1a040160        0x4 LONG 0x0 SIZEOF (.bss_RAM7)
+                0x1a040164        0x4 LONG 0x20008400 ADDR (.bss_RAM8)
+                0x1a040168        0x4 LONG 0x0 SIZEOF (.bss_RAM8)
+                0x1a04016c        0x4 LONG 0x2000c000 ADDR (.bss_RAM9)
+                0x1a040170        0x4 LONG 0x0 SIZEOF (.bss_RAM9)
+                0x1a040174                __bss_section_table_end = .
+                0x1a040174                __section_table_end = .
+ *(.after_vectors*)
+ .after_vectors
+                0x1a040174       0xa4 ./src/cr_startup_lpc43xx_m0app.o
+                0x1a040174                data_init
+                0x1a0401b4                bss_init
+                0x1a0401e8                NMI_Handler
+                0x1a0401f0                HardFault_Handler
+                0x1a0401f8                SVC_Handler
+                0x1a040200                PendSV_Handler
+                0x1a040208                SysTick_Handler
+                0x1a040210                I2C0_IRQHandler
+                0x1a040210                SPIFI_ADCHS_IRQHandler
+                0x1a040210                SDIO_IRQHandler
+                0x1a040210                UART1_IRQHandler
+                0x1a040210                USB1_IRQHandler
+                0x1a040210                TIMER3_IRQHandler
+                0x1a040210                UART0_IRQHandler
+                0x1a040210                SGPIO_IRQHandler
+                0x1a040210                ADC0_IRQHandler
+                0x1a040210                IntDefaultHandler
+                0x1a040210                SSP0_SSP1_IRQHandler
+                0x1a040210                ADC1_IRQHandler
+                0x1a040210                RIT_WDT_IRQHandler
+                0x1a040210                FLASH_EEPROM_ATIMER_IRQHandler
+                0x1a040210                RTC_IRQHandler
+                0x1a040210                TIMER0_IRQHandler
+                0x1a040210                LCD_IRQHandler
+                0x1a040210                M4_IRQHandler
+                0x1a040210                I2S0_I2S1_QEI_IRQHandler
+                0x1a040210                USB0_IRQHandler
+                0x1a040210                SCT_IRQHandler
+                0x1a040210                SPI_DAC_IRQHandler
+                0x1a040210                ETH_IRQHandler
+                0x1a040210                CAN0_IRQHandler
+                0x1a040210                UART2_CAN1_IRQHandler
+                0x1a040210                M0SUB_IRQHandler
+                0x1a040210                DMA_IRQHandler
+                0x1a040210                EVRT_IRQHandler
+                0x1a040210                UART3_IRQHandler
+                0x1a040210                MCPWM_IRQHandler
+                0x1a040210                GINT1_IRQHandler
+                0x1a040210                GPIO4_IRQHandler
+ *(.text*)
+ .text.ResetISR
+                0x1a040218       0x8c ./src/cr_startup_lpc43xx_m0app.o
+                0x1a040218                ResetISR
+ .text.Chip_GPIO_ReadPortBit
+                0x1a0402a4       0x2c ./src/main.o
+ .text.Chip_GPIO_GetPortValue
+                0x1a0402d0       0x28 ./src/main.o
+ .text.Chip_GPIO_SetPinOutHigh
+                0x1a0402f8       0x40 ./src/main.o
+ .text.Chip_GPIO_SetPinOutLow
+                0x1a040338       0x40 ./src/main.o
+ .text.Chip_TIMER_ReadCapture
+                0x1a040378       0x28 ./src/main.o
+ .text.pushByteToReception
+                0x1a0403a0       0x44 ./src/main.o
+ .text.popByteFromTransmissionBuffer
+                0x1a0403e4       0x40 ./src/main.o
+ .text.bytesToSend
+                0x1a040424       0x2c ./src/main.o
+ .text.freeSpaceForReception
+                0x1a040450       0x2c ./src/main.o
+ *fill*         0x1a04047c        0x4 ff
+ .text.freeSpaceForReception.__stub
+                0x1a040480       0x10 linker stubs
+ *(.rodata .rodata.* .constdata .constdata.*)
+                0x1a040490                . = ALIGN (0x4)
+
+.glue_7         0x1a040490        0x0
+ .glue_7        0x1a040490        0x0 linker stubs
+
+.glue_7t        0x1a040490        0x0
+ .glue_7t       0x1a040490        0x0 linker stubs
+
+.vfp11_veneer   0x1a040490        0x0
+ .vfp11_veneer  0x1a040490        0x0 linker stubs
+
+.v4_bx          0x1a040490        0x0
+ .v4_bx         0x1a040490        0x0 linker stubs
+
+.iplt           0x1a040490        0x0
+ .iplt          0x1a040490        0x0 ./src/cr_startup_lpc43xx_m0app.o
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x1a040490                __exidx_start = .
+
+.ARM.exidx
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+                0x1a040490                __exidx_end = .
+                0x1a040490                _etext = .
+
+.data_RAM2      0x10086014        0x0 load address 0x1a040490
+ FILL mask 0xff
+                [!provide]                PROVIDE (__start_data_RAM2, .)
+ *(.ramfunc.$RAM2)
+ *(.ramfunc.$RamLoc40)
+ *(.data.$RAM2*)
+ *(.data.$RamLoc40*)
+                0x10086014                . = ALIGN (0x4)
+                [!provide]                PROVIDE (__end_data_RAM2, .)
+
+.data_RAM3      0x10002014        0x0 load address 0x1a040490
+ FILL mask 0xff
+                [!provide]                PROVIDE (__start_data_RAM3, .)
+ *(.ramfunc.$RAM3)
+ *(.ramfunc.$RamLoc32)
+ *(.data.$RAM3*)
+ *(.data.$RamLoc32*)
+                0x10002014                . = ALIGN (0x4)
+                [!provide]                PROVIDE (__end_data_RAM3, .)
+
+.data_RAM4      0x10080000        0x0 load address 0x1a040490
+ FILL mask 0xff
+                [!provide]                PROVIDE (__start_data_RAM4, .)
+ *(.ramfunc.$RAM4)
+ *(.ramfunc.$EventsBuffer32)
+ *(.data.$RAM4*)
+ *(.data.$EventsBuffer32*)
+                0x10080000                . = ALIGN (0x4)
+                [!provide]                PROVIDE (__end_data_RAM4, .)
+
+.data_RAM5      0x10000000        0x0 load address 0x1a040490
+ FILL mask 0xff
+                [!provide]                PROVIDE (__start_data_RAM5, .)
+ *(.ramfunc.$RAM5)
+ *(.ramfunc.$UartBuffer)
+ *(.data.$RAM5*)
+ *(.data.$UartBuffer*)
+                0x10000000                . = ALIGN (0x4)
+                [!provide]                PROVIDE (__end_data_RAM5, .)
+
+.data_RAM6      0x10086010        0x0 load address 0x1a040490
+ FILL mask 0xff
+                [!provide]                PROVIDE (__start_data_RAM6, .)
+ *(.ramfunc.$RAM6)
+ *(.ramfunc.$M0Start)
+ *(.data.$RAM6*)
+ *(.data.$M0Start*)
+                0x10086010                . = ALIGN (0x4)
+                [!provide]                PROVIDE (__end_data_RAM6, .)
+
+.data_RAM7      0x20000000        0x0 load address 0x1a040490
+ FILL mask 0xff
+                [!provide]                PROVIDE (__start_data_RAM7, .)
+ *(.ramfunc.$RAM7)
+ *(.ramfunc.$RamAHB32)
+ *(.data.$RAM7*)
+ *(.data.$RamAHB32*)
+                0x20000000                . = ALIGN (0x4)
+                [!provide]                PROVIDE (__end_data_RAM7, .)
+
+.data_RAM8      0x20008400        0x0 load address 0x1a040490
+ FILL mask 0xff
+                [!provide]                PROVIDE (__start_data_RAM8, .)
+ *(.ramfunc.$RAM8)
+ *(.ramfunc.$RamAHB16)
+ *(.data.$RAM8*)
+ *(.data.$RamAHB16*)
+                0x20008400                . = ALIGN (0x4)
+                [!provide]                PROVIDE (__end_data_RAM8, .)
+
+.data_RAM9      0x2000c000        0x0 load address 0x1a040490
+ FILL mask 0xff
+                [!provide]                PROVIDE (__start_data_RAM9, .)
+ *(.ramfunc.$RAM9)
+ *(.ramfunc.$RamAHB_ETB16)
+ *(.data.$RAM9*)
+ *(.data.$RamAHB_ETB16*)
+                0x2000c000                . = ALIGN (0x4)
+                [!provide]                PROVIDE (__end_data_RAM9, .)
+
+.uninit_RESERVED
+                0x20008000        0x0
+ *(.bss.$RESERVED*)
+                0x20008000                . = ALIGN (0x4)
+                0x20008000                _end_uninit_RESERVED = .
+
+.data           0x20008000      0x270 load address 0x1a040490
+ FILL mask 0xff
+                0x20008000                _data = .
+ *(vtable)
+ *(.ramfunc*)
+ .ramfunc.$RAM  0x20008000      0x1e0 ./src/main.o
+                0x20008000                main
+ .ramfunc.$RAM.__stub
+                0x200081e0       0x90 linker stubs
+ *(.data*)
+                0x20008270                . = ALIGN (0x4)
+                0x20008270                _edata = .
+
+.igot.plt       0x20008270        0x0 load address 0x1a040700
+ .igot.plt      0x20008270        0x0 ./src/cr_startup_lpc43xx_m0app.o
+
+.rel.dyn        0x20008270        0x0 load address 0x1a040700
+ .rel.iplt      0x20008270        0x0 ./src/cr_startup_lpc43xx_m0app.o
+
+.bss_RAM2       0x10086014        0x0
+                [!provide]                PROVIDE (__start_bss_RAM2, .)
+ *(.bss.$RAM2*)
+ *(.bss.$RamLoc40*)
+                0x10086014                . = ALIGN ((. != 0x0)?0x4:0x1)
+                [!provide]                PROVIDE (__end_bss_RAM2, .)
+
+.bss_RAM3       0x10002014        0x0
+                [!provide]                PROVIDE (__start_bss_RAM3, .)
+ *(.bss.$RAM3*)
+ *(.bss.$RamLoc32*)
+                0x10002014                . = ALIGN ((. != 0x0)?0x4:0x1)
+                [!provide]                PROVIDE (__end_bss_RAM3, .)
+
+.bss_RAM4       0x10080000        0x0
+                [!provide]                PROVIDE (__start_bss_RAM4, .)
+ *(.bss.$RAM4*)
+ *(.bss.$EventsBuffer32*)
+                0x10080000                . = ALIGN ((. != 0x0)?0x4:0x1)
+                [!provide]                PROVIDE (__end_bss_RAM4, .)
+
+.bss_RAM5       0x10000000        0x0
+                [!provide]                PROVIDE (__start_bss_RAM5, .)
+ *(.bss.$RAM5*)
+ *(.bss.$UartBuffer*)
+                0x10000000                . = ALIGN ((. != 0x0)?0x4:0x1)
+                [!provide]                PROVIDE (__end_bss_RAM5, .)
+
+.bss_RAM6       0x10086010        0x0
+                [!provide]                PROVIDE (__start_bss_RAM6, .)
+ *(.bss.$RAM6*)
+ *(.bss.$M0Start*)
+                0x10086010                . = ALIGN ((. != 0x0)?0x4:0x1)
+                [!provide]                PROVIDE (__end_bss_RAM6, .)
+
+.bss_RAM7       0x20000000        0x0
+                [!provide]                PROVIDE (__start_bss_RAM7, .)
+ *(.bss.$RAM7*)
+ *(.bss.$RamAHB32*)
+                0x20000000                . = ALIGN ((. != 0x0)?0x4:0x1)
+                [!provide]                PROVIDE (__end_bss_RAM7, .)
+
+.bss_RAM8       0x20008400        0x0
+                [!provide]                PROVIDE (__start_bss_RAM8, .)
+ *(.bss.$RAM8*)
+ *(.bss.$RamAHB16*)
+                0x20008400                . = ALIGN ((. != 0x0)?0x4:0x1)
+                [!provide]                PROVIDE (__end_bss_RAM8, .)
+
+.bss_RAM9       0x2000c000        0x0
+                [!provide]                PROVIDE (__start_bss_RAM9, .)
+ *(.bss.$RAM9*)
+ *(.bss.$RamAHB_ETB16*)
+                0x2000c000                . = ALIGN ((. != 0x0)?0x4:0x1)
+                [!provide]                PROVIDE (__end_bss_RAM9, .)
+
+.bss            0x20008270        0x0
+                0x20008270                _bss = .
+ *(.bss*)
+ *(COMMON)
+                0x20008270                . = ALIGN (0x4)
+                0x20008270                _ebss = .
+                [!provide]                PROVIDE (end, .)
+
+.noinit_RAM2    0x10086014        0x0
+ *(.noinit.$RAM2*)
+ *(.noinit.$RamLoc40*)
+                0x10086014                . = ALIGN (0x4)
+
+.noinit_RAM3    0x10002014        0x0
+ *(.noinit.$RAM3*)
+ *(.noinit.$RamLoc32*)
+                0x10002014                . = ALIGN (0x4)
+
+.noinit_RAM4    0x10080000     0x6010
+ *(.noinit.$RAM4*)
+ .noinit.$RAM4  0x10080000     0x6010 ./src/main.o
+                0x10080000                events
+ *(.noinit.$EventsBuffer32*)
+                0x10086010                . = ALIGN (0x4)
+
+.noinit_RAM5    0x10000000     0x2010
+ *(.noinit.$RAM5*)
+ .noinit.$RAM5  0x10000000     0x2010 ./src/main.o
+                0x10000000                uart
+ *(.noinit.$UartBuffer*)
+                0x10002010                . = ALIGN (0x4)
+
+.noinit_RAM6    0x10086010        0x4
+ *(.noinit.$RAM6*)
+ .noinit.$RAM6  0x10086010        0x4 ./src/main.o
+                0x10086010                __core_m0_has_started__
+ *(.noinit.$M0Start*)
+                0x10086014                . = ALIGN (0x4)
+
+.noinit_RAM7    0x20000000        0x0
+ *(.noinit.$RAM7*)
+ *(.noinit.$RamAHB32*)
+                0x20000000                . = ALIGN (0x4)
+
+.noinit_RAM8    0x20008400        0x0
+ *(.noinit.$RAM8*)
+ *(.noinit.$RamAHB16*)
+                0x20008400                . = ALIGN (0x4)
+
+.noinit_RAM9    0x2000c000        0x0
+ *(.noinit.$RAM9*)
+ *(.noinit.$RamAHB_ETB16*)
+                0x2000c000                . = ALIGN (0x4)
+
+.noinit         0x20008270        0x0
+                0x20008270                _noinit = .
+ *(.noinit*)
+                0x20008270                . = ALIGN (0x4)
+                0x20008270                _end_noinit = .
+                [!provide]                PROVIDE (_pvHeapStart, DEFINED (__user_heap_base)?__user_heap_base:.)
+                0x20008400                PROVIDE (_vStackTop, DEFINED (__user_stack_top)?__user_stack_top:(__top_M0CodeRam - 0x0))
+OUTPUT(EDVSBoardOSM0.axf elf32-littlearm)
+
+.debug_info     0x00000000      0xf60
+ .debug_info    0x00000000      0x221 ./src/cr_startup_lpc43xx_m0app.o
+ .debug_info    0x00000221      0xd3f ./src/main.o
+
+.debug_abbrev   0x00000000      0x358
+ .debug_abbrev  0x00000000       0xe6 ./src/cr_startup_lpc43xx_m0app.o
+ .debug_abbrev  0x000000e6      0x272 ./src/main.o
+
+.debug_aranges  0x00000000       0xc8
+ .debug_aranges
+                0x00000000       0x60 ./src/cr_startup_lpc43xx_m0app.o
+ .debug_aranges
+                0x00000060       0x68 ./src/main.o
+
+.debug_ranges   0x00000000       0xa8
+ .debug_ranges  0x00000000       0x50 ./src/cr_startup_lpc43xx_m0app.o
+ .debug_ranges  0x00000050       0x58 ./src/main.o
+
+.debug_macro    0x00000000     0x3af4
+ .debug_macro   0x00000000       0x1d ./src/cr_startup_lpc43xx_m0app.o
+ .debug_macro   0x0000001d      0x844 ./src/cr_startup_lpc43xx_m0app.o
+ .debug_macro   0x00000861      0x31d ./src/main.o
+ .debug_macro   0x00000b7e       0x22 ./src/main.o
+ .debug_macro   0x00000ba0       0x44 ./src/main.o
+ .debug_macro   0x00000be4       0xfd ./src/main.o
+ .debug_macro   0x00000ce1       0x22 ./src/main.o
+ .debug_macro   0x00000d03      0x1df ./src/main.o
+ .debug_macro   0x00000ee2       0x16 ./src/main.o
+ .debug_macro   0x00000ef8       0x22 ./src/main.o
+ .debug_macro   0x00000f1a       0x7b ./src/main.o
+ .debug_macro   0x00000f95       0x22 ./src/main.o
+ .debug_macro   0x00000fb7       0x3a ./src/main.o
+ .debug_macro   0x00000ff1       0x1f ./src/main.o
+ .debug_macro   0x00001010      0x242 ./src/main.o
+ .debug_macro   0x00001252      0x2b6 ./src/main.o
+ .debug_macro   0x00001508      0x112 ./src/main.o
+ .debug_macro   0x0000161a       0x11 ./src/main.o
+ .debug_macro   0x0000162b       0x1e ./src/main.o
+ .debug_macro   0x00001649       0x16 ./src/main.o
+ .debug_macro   0x0000165f      0x2e6 ./src/main.o
+ .debug_macro   0x00001945       0x82 ./src/main.o
+ .debug_macro   0x000019c7      0x13d ./src/main.o
+ .debug_macro   0x00001b04      0x198 ./src/main.o
+ .debug_macro   0x00001c9c       0x34 ./src/main.o
+ .debug_macro   0x00001cd0       0x58 ./src/main.o
+ .debug_macro   0x00001d28      0x236 ./src/main.o
+ .debug_macro   0x00001f5e      0x572 ./src/main.o
+ .debug_macro   0x000024d0       0x16 ./src/main.o
+ .debug_macro   0x000024e6      0x18a ./src/main.o
+ .debug_macro   0x00002670       0x88 ./src/main.o
+ .debug_macro   0x000026f8      0x1b9 ./src/main.o
+ .debug_macro   0x000028b1      0x1da ./src/main.o
+ .debug_macro   0x00002a8b       0x40 ./src/main.o
+ .debug_macro   0x00002acb       0x1c ./src/main.o
+ .debug_macro   0x00002ae7       0x2e ./src/main.o
+ .debug_macro   0x00002b15       0x22 ./src/main.o
+ .debug_macro   0x00002b37      0x201 ./src/main.o
+ .debug_macro   0x00002d38       0xe0 ./src/main.o
+ .debug_macro   0x00002e18      0x34c ./src/main.o
+ .debug_macro   0x00003164       0xdc ./src/main.o
+ .debug_macro   0x00003240       0x94 ./src/main.o
+ .debug_macro   0x000032d4       0xb8 ./src/main.o
+ .debug_macro   0x0000338c       0x4c ./src/main.o
+ .debug_macro   0x000033d8       0x16 ./src/main.o
+ .debug_macro   0x000033ee      0x328 ./src/main.o
+ .debug_macro   0x00003716       0x3a ./src/main.o
+ .debug_macro   0x00003750       0xd0 ./src/main.o
+ .debug_macro   0x00003820       0x18 ./src/main.o
+ .debug_macro   0x00003838       0x22 ./src/main.o
+ .debug_macro   0x0000385a       0x40 ./src/main.o
+ .debug_macro   0x0000389a       0x34 ./src/main.o
+ .debug_macro   0x000038ce      0x106 ./src/main.o
+ .debug_macro   0x000039d4       0x6a ./src/main.o
+ .debug_macro   0x00003a3e       0x34 ./src/main.o
+ .debug_macro   0x00003a72       0x82 ./src/main.o
+
+.debug_line     0x00000000      0x8af
+ .debug_line    0x00000000       0xd5 ./src/cr_startup_lpc43xx_m0app.o
+ .debug_line    0x000000d5      0x7da ./src/main.o
+
+.debug_str      0x00000000    0x10de6
+ .debug_str     0x00000000     0x250d ./src/cr_startup_lpc43xx_m0app.o
+                               0x2520 (size before relaxing)
+ .debug_str     0x0000250d     0xe8d9 ./src/main.o
+                              0x10e51 (size before relaxing)
+
+.comment        0x00000000       0x6e
+ .comment       0x00000000       0x6e ./src/cr_startup_lpc43xx_m0app.o
+                                 0x6f (size before relaxing)
+ .comment       0x0000006e       0x6f ./src/main.o
+
+.ARM.attributes
+                0x00000000       0x31
+ .ARM.attributes
+                0x00000000       0x31 ./src/cr_startup_lpc43xx_m0app.o
+ .ARM.attributes
+                0x00000031       0x31 ./src/main.o
+
+.debug_frame    0x00000000      0x268
+ .debug_frame   0x00000000      0x118 ./src/cr_startup_lpc43xx_m0app.o
+ .debug_frame   0x00000118      0x150 ./src/main.o
