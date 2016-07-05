@@ -189,12 +189,17 @@ void sensorsInit(void) {
 	sensorsTimers[MOTOR_CURRENTS].refresh = MotorCurrentsReport;
 	sensorsTimers[PWM_SIGNALS].refresh = MotorPWMReport;
 	sensorsTimers[EVENT_RATE].refresh = EventCountReport;
+
+	// initialize channel 4 and 5 for the microphone values
+
 	uint32_t load = Chip_Clock_GetRate(CLK_MX_MXCORE) / 1000 - 1;
 	if (load > 0xFFFFFF) {
 		load = 0xFFFFFF;
 	}
 	SysTick->LOAD = load;
-	SysTick->CTRL |= 0x7;	//enable the Systick
+	SysTick->CTRL |= 0x7;	// enable the Systick, bit 0 is enable, bit 1 is
+							// interrupt/polling choice, bit 2 selects the core clock/external clock
+							// thus 0x07 = 0b111 (enabled, interrupt mode, core clock)
 }
 
 void enableSensors(uint32_t mask, uint8_t flag, uint32_t period) {

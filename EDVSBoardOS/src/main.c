@@ -44,7 +44,9 @@ int main(void) {
 	buildTime = build;
 	//This should be one of the first initializations routines to run.
 	sensorsInit();
+#ifdef NEED_EVENT
 	DVS128ChipInit();
+#endif
 	DacInit();
 	UARTInit(LPC_UART, BAUD_RATE_DEFAULT); /* baud rate setting */
 	initMotors();
@@ -84,6 +86,15 @@ int main(void) {
 		while (bytesReceived(&uart)) {  // incoming char available?
 			UART0ParseNewChar(popByteFromReceptionBuffer(&uart));
 		}
+
+		// *****************************************************************************
+		//    Deal with audio data
+		// *****************************************************************************
+		/*
+		 * cache a chunk of data into the buffer
+		 * do the fft cross correlation and figure out the angle
+		 * manipulate the proceeding direction of the pushbot
+		 */
 #if USE_IMU_DATA
 		updateIMUData();
 #endif
