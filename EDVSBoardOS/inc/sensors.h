@@ -12,6 +12,14 @@
 
 #define MAX_SENSORS							(32)
 
+#define BUFFER_MAX_SIZE     (256)
+extern COMPLEX left0[BUFFER_MAX_SIZE];
+extern COMPLEX right0[BUFFER_MAX_SIZE];
+extern COMPLEX left1[BUFFER_MAX_SIZE];
+extern COMPLEX right1[BUFFER_MAX_SIZE];
+extern uint8_t buf_flag;  // indicating whether buffer0 or buffer 1 is used
+extern uint8_t process_flag;  // flag for processing the buf data
+
 enum SensorIDs {
 	BATTERY = 0,
 	ADC0,

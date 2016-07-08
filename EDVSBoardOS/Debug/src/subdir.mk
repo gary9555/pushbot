@@ -8,6 +8,7 @@ C_SRCS += \
 ../src/cr_start_m0.c \
 ../src/cr_startup_lpc43xx.c \
 ../src/extra_pins.c \
+../src/itd.c \
 ../src/main.c \
 ../src/motors.c \
 ../src/mpu9150.c \
@@ -27,6 +28,7 @@ OBJS += \
 ./src/cr_start_m0.o \
 ./src/cr_startup_lpc43xx.o \
 ./src/extra_pins.o \
+./src/itd.o \
 ./src/main.o \
 ./src/motors.o \
 ./src/mpu9150.o \
@@ -46,6 +48,7 @@ C_DEPS += \
 ./src/cr_start_m0.d \
 ./src/cr_startup_lpc43xx.d \
 ./src/extra_pins.d \
+./src/itd.d \
 ./src/main.d \
 ./src/motors.d \
 ./src/mpu9150.d \

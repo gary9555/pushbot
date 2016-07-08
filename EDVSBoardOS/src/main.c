@@ -15,6 +15,7 @@
 #include "utils.h"
 #include "cr_start_m0.h"
 #include "build_defs.h"
+#include "itd.h"
 //Uncomment the line below to activate test mode.
 //#include "test.h"
 
@@ -29,6 +30,8 @@ RTC_TIME_T buildTime; //Holds the build time to set the RTC after enabling it
 
 //#define NEED_EVENT
 
+
+
 int main(void) {
 #ifdef NEED_EVENT
 	uint32_t DVSEventPointer;
@@ -36,6 +39,9 @@ int main(void) {
 	uint16_t DVSEvent;
 	uint32_t timeStampMemory = 0, timeStampDelta = 0;
 #endif
+
+	int8_t angle = 0;
+
 	ExtraPinsInit();
 	disablePeripherals();
 	Chip_RIT_Init(LPC_RITIMER);
@@ -91,10 +97,15 @@ int main(void) {
 		//    Deal with audio data
 		// *****************************************************************************
 		/*
-		 * cache a chunk of data into the buffer
 		 * do the fft cross correlation and figure out the angle
 		 * manipulate the proceeding direction of the pushbot
 		 */
+		// if buffer reaches a length of 1024
+		if(process_flag != -1){  // -1 for not ready, 0 for buffer0, 1 for buffer1
+			angle = itd();
+		}
+		// start doing math
+
 #if USE_IMU_DATA
 		updateIMUData();
 #endif
@@ -109,6 +120,8 @@ int main(void) {
 			updateMotorController(MOTOR1);
 		}
 #endif
+
+		/*// disable the data streaming through serial
 		if (sensorRefreshRequested) {
 			sensorRefreshRequested = 0;
 			for (int i = 0; i < sensorsEnabledCounter; ++i) {
@@ -118,6 +131,7 @@ int main(void) {
 				}
 			}
 		}
+		*/
 
 #ifdef NEED_EVENT
 		// *****************************************************************************

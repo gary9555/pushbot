@@ -39,6 +39,127 @@ volatile uint32_t lastEventRecordedCount = 0;
 static ADC_CLOCK_SETUP_T adcConfig;
 struct sensorTimer * enabledSensors[MAX_SENSORS];
 
+// Buffers for the left and right microphone signals
+COMPLEX left0[BUFFER_MAX_SIZE];
+COMPLEX right0[BUFFER_MAX_SIZE];
+COMPLEX left1[BUFFER_MAX_SIZE];
+COMPLEX right1[BUFFER_MAX_SIZE];
+uint8_t buf_flag;  // indicating whether buffer0 or buffer 1 is used
+uint8_t process_flag = -1;  // flag for processing the buf data
+
+
+/**
+ * The Systick handler is used for a lot more tasks than sensor timing.
+ * It also provides a timer for decaying for the motor velocity, motor control
+ * and second timer used for the LED blinking and Retina event rate.
+ */
+void SysTick_Handler(void) {  // now the systick handler function is called every 1/50000 second
+	static uint16_t second_timer = 0;
+
+#if USE_PUSHBOT
+	static uint16_t one_k_hertz_timer = 0;
+	static uint16_t ten_hertz_timer = 0;
+	if (++ten_hertz_timer >= 5000) {  // 100
+		ten_hertz_timer = 0;
+		if (motor0.controlMode & DECAY_MODE) {
+			if (motor0.decayCounter == 0) {
+				if (motor0.controlMode & DIRECT_MODE) {
+					if (motor0.requestedWidth != 0) {
+						motor0.requestedWidth = (motor0.requestedWidth * 90) / 100;
+						updateMotorWidth(0, motor0.requestedWidth);
+					}
+				} else {
+					if (motor0.requestedVelocity > 0) {
+						motor0.requestedVelocity--;
+					} else if (motor0.requestedVelocity < 0) {
+						motor0.requestedVelocity++;
+					}
+				}
+			} else {
+				motor0.decayCounter--;
+			}
+		}
+		if (motor1.controlMode & (DECAY_MODE)) {
+			if (motor1.decayCounter == 0) {
+				if (motor1.controlMode & DIRECT_MODE) {
+					if (motor1.requestedWidth != 0) {
+						motor1.requestedWidth = (motor1.requestedWidth * 90) / 100;
+						updateMotorWidth(1, motor1.requestedWidth);
+					}
+				} else {
+					if (motor1.requestedVelocity > 0) {
+						motor1.requestedVelocity--;
+					} else if (motor1.requestedVelocity < 0) {
+						motor1.requestedVelocity++;
+					}
+				}
+			} else {
+				motor1.decayCounter--;
+			}
+		}
+	}
+	if(one_k_hertz_timer == 50){
+		one_k_hertz_timer = 0;
+		if (motor0.controlMode & VELOCITY_MODE) {
+			motor0.updateRequired = 1;
+		}
+		if (motor1.controlMode & VELOCITY_MODE) {
+			motor1.updateRequired = 1;
+		}
+	}
+#endif
+	if (++second_timer >= 50000) { //1000
+		lastEventCount = events.currentEventRate;
+#if USE_SDCARD
+		lastByteCount = sdcard.bytesWrittenPerSecond;
+		lastEventRecordedCount = sdcard.eventsRecordedPerSecond;
+#endif
+		__DSB(); //Ensure it has been saved
+		events.currentEventRate = 0;
+#if USE_SDCARD
+		sdcard.bytesWrittenPerSecond = 0;
+		sdcard.eventsRecordedPerSecond = 0;
+#endif
+
+		second_timer = 0;
+		toggleLed0 = 1;
+	}
+
+	//GET adc value every 1/50000 second
+	// only when both channels successfully get the data that we increase the buf length
+	if(!buf_flag){
+		if(Chip_ADC_ReadValue(LPC_ADC1, 6, left0+buf_length) == SUCCESS){
+			if(Chip_ADC_ReadValue(LPC_ADC1, 7, right0+buf_length) == SUCCESS){
+				if(++buf_length == BUFFER_MAX_SIZE){
+					buf_length = 0;
+					buf_flag = !buf_flag;
+					process_flag = 0;
+				}
+			}
+		}
+	}else{
+		if(Chip_ADC_ReadValue(LPC_ADC1, 6, left1+buf_length) == SUCCESS){
+			if(Chip_ADC_ReadValue(LPC_ADC1, 7, right1+buf_length) == SUCCESS){
+				if(++buf_length == BUFFER_MAX_SIZE){
+					buf_length = 0;
+					buf_flag = !buf_flag;
+					process_flag = 1;
+				}
+			}
+		}
+	}
+
+	/*
+	for (int i = 0; i < sensorsEnabledCounter; ++i) {
+		if (--enabledSensors[i]->counter == 0) {
+			enabledSensors[i]->counter = enabledSensors[i]->reload;
+			enabledSensors[i]->triggered = 1;
+			sensorRefreshRequested = 1;
+		}
+	}
+	*/
+}
+
 STATIC INLINE void printADCRead(uint8_t sensorId, uint8_t channel) {
 	uint16_t data;
 	if (Chip_ADC_ReadValue(LPC_ADC1, channel, &data) == SUCCESS) {
@@ -191,8 +312,11 @@ void sensorsInit(void) {
 	sensorsTimers[EVENT_RATE].refresh = EventCountReport;
 
 	// initialize channel 4 and 5 for the microphone values
+	ADC4Init();
+	ADC5Init();
 
-	uint32_t load = Chip_Clock_GetRate(CLK_MX_MXCORE) / 1000 - 1;
+	//uint32_t load = Chip_Clock_GetRate(CLK_MX_MXCORE) / 1000 - 1;
+	uint32_t load = Chip_Clock_GetRate(CLK_MX_MXCORE) / ADC_FREQ - 1;
 	if (load > 0xFFFFFF) {
 		load = 0xFFFFFF;
 	}
@@ -265,84 +389,3 @@ void getSensorsOutput(uint32_t mask) {
 		}
 	}
 }
-
-/**
- * The Systick handler is used for a lot more tasks than sensor timing.
- * It also provides a timer for decaying for the motor velocity, motor control
- * and second timer used for the LED blinking and Retina event rate.
- */
-void SysTick_Handler(void) {
-	static uint16_t second_timer = 0;
-#if USE_PUSHBOT
-	static uint16_t ten_hertz_timer = 0;
-	if (++ten_hertz_timer >= 100) {
-		ten_hertz_timer = 0;
-		if (motor0.controlMode & DECAY_MODE) {
-			if (motor0.decayCounter == 0) {
-				if (motor0.controlMode & DIRECT_MODE) {
-					if (motor0.requestedWidth != 0) {
-						motor0.requestedWidth = (motor0.requestedWidth * 90) / 100;
-						updateMotorWidth(0, motor0.requestedWidth);
-					}
-				} else {
-					if (motor0.requestedVelocity > 0) {
-						motor0.requestedVelocity--;
-					} else if (motor0.requestedVelocity < 0) {
-						motor0.requestedVelocity++;
-					}
-				}
-			} else {
-				motor0.decayCounter--;
-			}
-		}
-		if (motor1.controlMode & (DECAY_MODE)) {
-			if (motor1.decayCounter == 0) {
-				if (motor1.controlMode & DIRECT_MODE) {
-					if (motor1.requestedWidth != 0) {
-						motor1.requestedWidth = (motor1.requestedWidth * 90) / 100;
-						updateMotorWidth(1, motor1.requestedWidth);
-					}
-				} else {
-					if (motor1.requestedVelocity > 0) {
-						motor1.requestedVelocity--;
-					} else if (motor1.requestedVelocity < 0) {
-						motor1.requestedVelocity++;
-					}
-				}
-			} else {
-				motor1.decayCounter--;
-			}
-		}
-	}
-	if (motor0.controlMode & VELOCITY_MODE) {
-		motor0.updateRequired = 1;
-	}
-	if (motor1.controlMode & VELOCITY_MODE) {
-		motor1.updateRequired = 1;
-	}
-#endif
-	if (++second_timer >= 1000) {
-		lastEventCount = events.currentEventRate;
-#if USE_SDCARD
-		lastByteCount = sdcard.bytesWrittenPerSecond;
-		lastEventRecordedCount = sdcard.eventsRecordedPerSecond;
-#endif
-		__DSB(); //Ensure it has been saved
-		events.currentEventRate = 0;
-#if USE_SDCARD
-		sdcard.bytesWrittenPerSecond = 0;
-		sdcard.eventsRecordedPerSecond = 0;
-#endif
-
-		second_timer = 0;
-		toggleLed0 = 1;
-	}
-	for (int i = 0; i < sensorsEnabledCounter; ++i) {
-		if (--enabledSensors[i]->counter == 0) {
-			enabledSensors[i]->counter = enabledSensors[i]->reload;
-			enabledSensors[i]->triggered = 1;
-			sensorRefreshRequested = 1;
-		}
-	}
-}
-
