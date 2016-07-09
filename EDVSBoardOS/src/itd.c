@@ -4,11 +4,23 @@
 #include "sensors.h"
 
 
+static const uint8_t sft  = BUFFER_MAX_SIZE / 2;
+static const uint8_t lag_limit = MIC_DIST / SOUND_SPEED * ADC_FREQ;
+
 static int8_t abs(int8_t num);
-static int norm(COMPLEX *x, uint16_t length);
+static void conjugate(COMPLEX *x, uint16_t length);
+static void max_index(COMPLEX *x, uint16_t lengt, int * max, int8_t * max_idx);
+static float norm(COMPLEX *x, uint16_t length);
 static uint32_t floor_log2_32(uint32_t x);
 int ones_32(uint32_t n);
 
+#define CONJ_REAL(left, right, i)   \
+    (left[i].real*right[i].real \
+     + left[i].imag*right[i].imag)
+
+#define CONJ_IMAG(left, right, i)   \
+    (left[i].real*right[i].imag \
+     - left[i].imag*right[i].real)
 
 int8_t itd(){
 
@@ -16,6 +28,8 @@ int8_t itd(){
 	int8_t angle;
 	COMPLEX *left;
 	COMPLEX *right;
+	int8_t lag;
+
 	if(process_flag == 0){
 		left=left0;
 		right=right0;
@@ -28,23 +42,37 @@ int8_t itd(){
 	fft(left,BUFFER_MAX_SIZE);
 	fft(right,BUFFER_MAX_SIZE);
 
-	f= ifft(X1.*conj(X2) / norm(X1) / norm(X2));
-	//sft = ceil(length(f)/2);
-	uint8_t sft  = 256/2;
-	f = [f(sft+1:end); f(1:sft)];
-	[maxx,lag] = max(f);
-	timelag = (lag-sft)/fs;
-	timelag_limit = mic_dist / SOUND_SPEED;
+	float normvalue = norm(left,BUFFER_MAX_SIZE) * norm(right,BUFFER_MAX_SIZE);
 
-	while (abs(timelag) > timelag_limit){
-	    [maxx,lag] = max(f(f<maxx));
-	    timelag = (lag-sft-1)/fs;
+	//
+	for(uint16_t i=0; i<BUFFER_MAX_SIZE;i++){
+		left[i].real = CONJ_REAL(left, right, i) / normvalue;
+		left[i].imag = CONJ_IMAG(left, right, i) / normvalue;
 	}
-	est_diff = timelag * SOUND_SPEED;
+
+	//
+	ifft(left,BUFFER_MAX_SIZE);
+
+	// get the lag value
+	int max_pos, max_neg;
+	int8_t lag_pos,lag_neg;
+
+	COMPLEX * temp1 = &left[0];
+	COMPLEX * temp2 = &left[BUFFER_MAX_SIZE-lag_limit];
+	max_index(temp1, lag_limit+1, &max_pos, &lag_pos);
+	max_index(temp2, lag_limit  , &max_neg, &lag_neg);
+
+	if(max_pos >= max_neg){
+		lag = lag_pos;
+	}else{
+		lag = lag_neg - lag_limit;
+	}
+
+	float est_diff = lag * SOUND_SPEED / ADC_FREQ;
 
 	if(est_diff != 0){
 	    //angle = (PI/2 - atan((0.01/est_diff^2-1) / (0.01/est_diff^2-1+est_diff^2/4-0.05^2)^0.5))/PI*180;
-	    angle = (PI/2 - atan(sqrt( 0.01/est_diff*est_diff - 1)));
+	    angle = (HALF_PI - atan(sqrt( 0.01/est_diff*est_diff - 1)));
 	    if(est_diff < 0)
 	        angle = -angle;
 	}else{
@@ -151,8 +179,24 @@ static int8_t abs(int8_t num){
 	return num;
 }
 
-static int norm(COMPLEX *x, uint16_t length){
-	int sum = 0;
+static void max_index(COMPLEX *x, uint16_t length, int * max, int8_t * max_idx){
+	*max = 0;
+	for(uint16_t i=0;i<length;i++){
+		if(abs((x+i)->real) > *max){
+			*max = abs((x+i)->real);
+			*max_idx = i;
+		}
+	}
+	return;
+}
+
+static void conjugate(COMPLEX *x, uint16_t length){
+	for(uint16_t i=0; i<length; i++)
+		x[i].imag = -x[i].imag;
+}
+
+static float norm(COMPLEX *x, uint16_t length){
+	float sum = 0;
 	for(uint8_t i = 0; i<length; i++){
 		sum += x[i].real*x[i].real + x[i].imag*x[i].imag;
 	}

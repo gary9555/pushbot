@@ -19,7 +19,6 @@
 #include <stdbool.h>
 
 #define ADC_ACCURACY						(10)
-#define ADC_FREQ							(50000)
 
 #define MOTOR_DRIVER_CURRENT1_SENSOR_PORT	(4)
 #define MOTOR_DRIVER_CURRENT1_SENSOR_PIN	(1)
@@ -44,7 +43,8 @@ COMPLEX left0[BUFFER_MAX_SIZE];
 COMPLEX right0[BUFFER_MAX_SIZE];
 COMPLEX left1[BUFFER_MAX_SIZE];
 COMPLEX right1[BUFFER_MAX_SIZE];
-uint8_t buf_flag;  // indicating whether buffer0 or buffer 1 is used
+uint16_t buf_length = 0;
+uint8_t buf_flag = 0;  // indicating whether buffer0 or buffer 1 is used
 uint8_t process_flag = -1;  // flag for processing the buf data
 
 
@@ -128,8 +128,8 @@ void SysTick_Handler(void) {  // now the systick handler function is called ever
 	//GET adc value every 1/50000 second
 	// only when both channels successfully get the data that we increase the buf length
 	if(!buf_flag){
-		if(Chip_ADC_ReadValue(LPC_ADC1, 6, left0+buf_length) == SUCCESS){
-			if(Chip_ADC_ReadValue(LPC_ADC1, 7, right0+buf_length) == SUCCESS){
+		if(Chip_ADC_ReadValue(LPC_ADC1, 6, &left0[buf_length].real) == SUCCESS){
+			if(Chip_ADC_ReadValue(LPC_ADC1, 7, &right0[buf_length].real) == SUCCESS){
 				if(++buf_length == BUFFER_MAX_SIZE){
 					buf_length = 0;
 					buf_flag = !buf_flag;
@@ -138,8 +138,8 @@ void SysTick_Handler(void) {  // now the systick handler function is called ever
 			}
 		}
 	}else{
-		if(Chip_ADC_ReadValue(LPC_ADC1, 6, left1+buf_length) == SUCCESS){
-			if(Chip_ADC_ReadValue(LPC_ADC1, 7, right1+buf_length) == SUCCESS){
+		if(Chip_ADC_ReadValue(LPC_ADC1, 6, &left1[buf_length].real) == SUCCESS){
+			if(Chip_ADC_ReadValue(LPC_ADC1, 7, &right1[buf_length].real) == SUCCESS){
 				if(++buf_length == BUFFER_MAX_SIZE){
 					buf_length = 0;
 					buf_flag = !buf_flag;
