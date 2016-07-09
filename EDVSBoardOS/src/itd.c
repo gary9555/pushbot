@@ -22,10 +22,22 @@ int ones_32(uint32_t n);
     (left[i].real*right[i].imag \
      - left[i].imag*right[i].real)
 
+static const float cos_tb[] = {  // žŤśČ(PI PI/2 PI/4 PI/8 PI/16 ... PI/(2^k))
+-1.000000, 0.000000, 0.707107, 0.923880, 0.980785, 0.995185 , 0.998795, 0.999699, 0.999925, 0.999981,
+0.999995, 0.999999, 1.000000, 1.000000, 1.000000, 1.000000 , 1.000000, 1.000000, 1.000000, 1.000000,
+1.000000,
+};
+
+static const float sin_tb[] = {  // žŤśČ(PI PI/2 PI/4 PI/8 PI/16 ... PI/(2^k))
+0.000000, 1.000000, 0.707107, 0.382683, 0.195090, 0.098017 , 0.049068, 0.024541, 0.012272, 0.006136,
+0.003068, 0.001534, 0.000767, 0.000383, 0.000192, 0.000096 , 0.000048, 0.000024, 0.000012, 0.000006,
+0.000003,
+};
+
 int8_t itd(){
 
 	// fft(x)
-	int8_t angle;
+	int8_t angle=0;
 	COMPLEX *left;
 	COMPLEX *right;
 	int8_t lag;
@@ -38,7 +50,7 @@ int8_t itd(){
 		left=left1;
 		right=right1;
 	}
-
+/*
 	fft(left,BUFFER_MAX_SIZE);
 	fft(right,BUFFER_MAX_SIZE);
 
@@ -57,8 +69,8 @@ int8_t itd(){
 	int max_pos, max_neg;
 	int8_t lag_pos,lag_neg;
 
-	COMPLEX * temp1 = &left[0];
-	COMPLEX * temp2 = &left[BUFFER_MAX_SIZE-lag_limit];
+	COMPLEX * temp1 = left;
+	COMPLEX * temp2 = left + BUFFER_MAX_SIZE - lag_limit;
 	max_index(temp1, lag_limit+1, &max_pos, &lag_pos);
 	max_index(temp2, lag_limit  , &max_neg, &lag_neg);
 
@@ -78,7 +90,7 @@ int8_t itd(){
 	}else{
 	    angle = 0;
 	}
-
+*/
 	return angle;
 }
 
@@ -125,11 +137,11 @@ int fft(COMPLEX *x, uint32_t N)
     /* Complete last stage FFT */
     uR = 1;
     uI = 0;
-    //k = floor_log2_32(M);
-    //sR = cos_tb[k]; //cos(PI / M);
-    //sI = -sin_tb[k];  // -sin(PI / M)
-    sR = cos(PI / M);
-    sI = -sin(PI / M);
+    k = floor_log2_32(M);
+    sR = cos_tb[k]; //cos(PI / M);
+    sI = -sin_tb[k];  // -sin(PI / M)
+    //sR = cos(PI / M);
+    //sI = -sin(PI / M);
 
     for (i=0; i<M; i++) {   /* loop for each sub DFT */
         k = i + M;

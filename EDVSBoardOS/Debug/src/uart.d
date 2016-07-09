@@ -63,6 +63,7 @@ src/uart.o src/uart.d: ../src/uart.c \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/uart.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/config.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/sensors.h \
+ /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/itd.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/motors.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/sleep.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/utils.h \
@@ -201,6 +202,8 @@ src/uart.o src/uart.d: ../src/uart.c \
 /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/config.h:
 
 /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/sensors.h:
+
+/home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/itd.h:
 
 /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/motors.h:
 

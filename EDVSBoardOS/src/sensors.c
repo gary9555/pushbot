@@ -134,6 +134,7 @@ void SysTick_Handler(void) {  // now the systick handler function is called ever
 					buf_length = 0;
 					buf_flag = !buf_flag;
 					process_flag = 0;
+					xputs(">>>>>");
 				}
 			}
 		}
@@ -144,6 +145,7 @@ void SysTick_Handler(void) {  // now the systick handler function is called ever
 					buf_length = 0;
 					buf_flag = !buf_flag;
 					process_flag = 1;
+					xputs("<<");
 				}
 			}
 		}

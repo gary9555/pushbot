@@ -61,6 +61,7 @@ src/sensors.o src/sensors.d: ../src/sensors.c \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/fixedptc.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/sensors.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/config.h \
+ /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/itd.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/config.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/motors.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/EDVS128_LPC43xx.h \
@@ -196,6 +197,8 @@ src/sensors.o src/sensors.d: ../src/sensors.c \
 /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/sensors.h:
 
 /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/config.h:
+
+/home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/itd.h:
 
 /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/config.h:
 

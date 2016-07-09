@@ -13,6 +13,7 @@
 #include "pwm.h"
 #include "pushbot.h"
 #include "utils.h"
+#include "xprintf.h"
 #include "cr_start_m0.h"
 #include "build_defs.h"
 #include "itd.h"
@@ -102,8 +103,14 @@ int main(void) {
 		 */
 		// if buffer reaches a length of 1024
 		if(process_flag != -1){  // -1 for not ready, 0 for buffer0, 1 for buffer1
+		//	SysTick->CTRL &= ~0x1;
+			process_flag = -1;
 			angle = itd();
+			//SysTick->CTRL |= 0x1;
+			xprintf("%d\n", angle*57);
 		}
+
+
 		// start doing math
 
 #if USE_IMU_DATA

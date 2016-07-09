@@ -91,6 +91,7 @@ src/mpu9150.o src/mpu9150.d: ../src/mpu9150.c \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/xprintf.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/sensors.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/config.h \
+ /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/itd.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/fixedptc.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/utils.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/extra_pins.h
@@ -278,6 +279,8 @@ src/mpu9150.o src/mpu9150.d: ../src/mpu9150.c \
 /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/sensors.h:
 
 /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/config.h:
+
+/home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/itd.h:
 
 /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/fixedptc.h:
 

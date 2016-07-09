@@ -60,6 +60,7 @@ src/pushbot.o src/pushbot.d: ../src/pushbot.c \
  /home/gary9555/Desktop/pushbot_new/lpc_chip_43xx/inc/fpu_init.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/sensors.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/config.h \
+ /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/itd.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/pushbot.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/config.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/xprintf.h
@@ -185,6 +186,8 @@ src/pushbot.o src/pushbot.d: ../src/pushbot.c \
 /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/sensors.h:
 
 /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/config.h:
+
+/home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/itd.h:
 
 /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/pushbot.h:
 

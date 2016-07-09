@@ -63,6 +63,7 @@ src/main.o src/main.d: ../src/main.c \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/config.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/sleep.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/sensors.h \
+ /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/itd.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/uart.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/EDVS128_LPC43xx.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/mpu9105.h \
@@ -74,8 +75,10 @@ src/main.o src/main.d: ../src/main.c \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/pwm.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/pushbot.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/utils.h \
+ /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/xprintf.h \
  /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/cr_start_m0.h \
- /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/build_defs.h
+ /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/build_defs.h \
+ /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/itd.h
 
 /home/gary9555/Desktop/pushbot_new/lpc_chip_43xx/inc/chip.h:
 
@@ -205,6 +208,8 @@ src/main.o src/main.d: ../src/main.c \
 
 /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/sensors.h:
 
+/home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/itd.h:
+
 /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/uart.h:
 
 /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/EDVS128_LPC43xx.h:
@@ -227,6 +232,10 @@ src/main.o src/main.d: ../src/main.c \
 
 /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/utils.h:
 
+/home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/xprintf.h:
+
 /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/cr_start_m0.h:
 
 /home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/build_defs.h:
+
+/home/gary9555/Desktop/pushbot_new/EDVSBoardOS/inc/itd.h:
