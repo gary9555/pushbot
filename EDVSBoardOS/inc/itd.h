@@ -1,6 +1,11 @@
 #ifndef __ITD_H
 #define __ITD_H
 #include <stdint.h>
+#include "sensors.h"
+
+
+#define XCORR
+//#define FFT
 
 
 typedef struct{
@@ -16,10 +21,7 @@ typedef struct{
 #define MIC_DIST		(0.1)
 
 
-
 int8_t itd(void);
-int fft(COMPLEX *x, uint32_t N);
-int ifft(COMPLEX *x, uint32_t N);
 
 
 #endif
