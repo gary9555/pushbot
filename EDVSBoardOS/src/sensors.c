@@ -17,6 +17,7 @@
 #include "xprintf.h"
 #include "utils.h"
 #include <stdbool.h>
+#include "itd.h"
 
 #define ADC_ACCURACY						(10)
 
@@ -38,14 +39,26 @@ volatile uint32_t lastEventRecordedCount = 0;
 static ADC_CLOCK_SETUP_T adcConfig;
 struct sensorTimer * enabledSensors[MAX_SENSORS];
 
+#define XCORR
+//#define FFT
 // Buffers for the left and right microphone signals
+#ifdef FFT
 COMPLEX left0[BUFFER_MAX_SIZE];
 COMPLEX right0[BUFFER_MAX_SIZE];
 COMPLEX left1[BUFFER_MAX_SIZE];
 COMPLEX right1[BUFFER_MAX_SIZE];
+#endif
+
+#ifdef XCORR
+uint16_t left0[BUFFER_MAX_SIZE];
+uint16_t right0[BUFFER_MAX_SIZE];
+uint16_t left1[BUFFER_MAX_SIZE];
+uint16_t right1[BUFFER_MAX_SIZE];
+#endif
+extern const int8_t lag_limit;
 uint16_t buf_length = 0;
 uint8_t buf_flag = 0;  // indicating whether buffer0 or buffer 1 is used
-uint8_t process_flag = -1;  // flag for processing the buf data
+int8_t process_flag = -1;  // flag for processing the buf data
 
 
 /**
@@ -55,7 +68,8 @@ uint8_t process_flag = -1;  // flag for processing the buf data
  */
 void SysTick_Handler(void) {  // now the systick handler function is called every 1/50000 second
 	static uint16_t second_timer = 0;
-
+	static uint32_t debug_timer = 0;
+	//static uint16_t data0,data1;
 #if USE_PUSHBOT
 	static uint16_t one_k_hertz_timer = 0;
 	static uint16_t ten_hertz_timer = 0;
@@ -127,30 +141,44 @@ void SysTick_Handler(void) {  // now the systick handler function is called ever
 
 	//GET adc value every 1/50000 second
 	// only when both channels successfully get the data that we increase the buf length
-	if(!buf_flag){
-		if(Chip_ADC_ReadValue(LPC_ADC1, 6, &left0[buf_length].real) == SUCCESS){
-			if(Chip_ADC_ReadValue(LPC_ADC1, 7, &right0[buf_length].real) == SUCCESS){
-				if(++buf_length == BUFFER_MAX_SIZE){
-					buf_length = 0;
-					buf_flag = !buf_flag;
-					process_flag = 0;
-					xputs(">>>>>");
+	if(++debug_timer >= 1000){
+		//xputs("1\n");
+		debug_timer = 0;
+		if(!buf_flag){
+			//xputs("22\n");
+			if(Chip_ADC_ReadValue(LPC_ADC1, 6, &left0[buf_length]) == SUCCESS){  // &left0[buf_length].real
+				//xputs("in1\n");
+				if(Chip_ADC_ReadValue(LPC_ADC1, 7, &right0[buf_length]) == SUCCESS){
+					//xprintf("   %d\n", data0);
+					//left0[buf_length].real = data0;
+					//right0[buf_length].real = data1;
+
+					if(++buf_length == BUFFER_MAX_SIZE){
+						buf_length = 0;
+						buf_flag = !buf_flag;
+						process_flag = 0;
+						//xputs(">>>>>");
+					}
 				}
 			}
-		}
-	}else{
-		if(Chip_ADC_ReadValue(LPC_ADC1, 6, &left1[buf_length].real) == SUCCESS){
-			if(Chip_ADC_ReadValue(LPC_ADC1, 7, &right1[buf_length].real) == SUCCESS){
-				if(++buf_length == BUFFER_MAX_SIZE){
-					buf_length = 0;
-					buf_flag = !buf_flag;
-					process_flag = 1;
-					xputs("<<");
+		}else{
+			//xputs("333\n");
+			if(Chip_ADC_ReadValue(LPC_ADC1, 6, &left1[buf_length]) == SUCCESS){
+				//xputs("in2\n");
+				if(Chip_ADC_ReadValue(LPC_ADC1, 7, &right1[buf_length]) == SUCCESS){
+					//xprintf("   %d\n", data0);
+					//left1[buf_length].real = data0;
+					//right1[buf_length].real = data1;
+					if(++buf_length == BUFFER_MAX_SIZE){
+						buf_length = 0;
+						buf_flag = !buf_flag;
+						process_flag = 1;
+						//xputs("<<");
+					}
 				}
 			}
 		}
 	}
-
 	/*
 	for (int i = 0; i < sensorsEnabledCounter; ++i) {
 		if (--enabledSensors[i]->counter == 0) {
