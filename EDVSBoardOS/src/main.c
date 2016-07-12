@@ -62,6 +62,7 @@ int main(void) {
 	timerDelayMs(100);
 	MPU9105Init();
 #endif
+
 #if USE_SDCARD
 	SDCardInit();
 #endif
@@ -104,7 +105,7 @@ int main(void) {
 		// if buffer reaches a length of 1024
 		if(process_flag != -1){  // -1 for not ready, 0 for buffer0, 1 for buffer1
 		//	SysTick->CTRL &= ~0x1;
-			process_flag = -1;
+			//xprintf("%d\n", process_flag);
 			angle = itd();
 			//SysTick->CTRL |= 0x1;
 			xprintf("%d\n", angle*57);
@@ -127,8 +128,8 @@ int main(void) {
 			updateMotorController(MOTOR1);
 		}
 #endif
-
-		/*// disable the data streaming through serial
+		/*
+		// disable the data streaming through serial
 		if (sensorRefreshRequested) {
 			sensorRefreshRequested = 0;
 			for (int i = 0; i < sensorsEnabledCounter; ++i) {
