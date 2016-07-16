@@ -6,7 +6,7 @@ brief configuration guide for this specific WLAN module, hopefully it saves time
 Configuration procedure for the module:
 1.	!!!!!Configuration via serial port only works in windows!!!!!! 
 2. Download putty: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
-3. Connecting and Configuring the module on PC
+3. Connecting the wlan module to PC
    a) Connect the wlan module to the PC via a serial module, then open Putty 
    b) In the "Session settings" (top left), change the Connection type to "Serial" and then write the correct 
    COM port into the Serial line textbox, and set the Speed to 12000000(12M). 
@@ -15,10 +15,16 @@ Configuration procedure for the module:
       bits is 1 and Parity is None (often referred to as 8N1). 
    d) Switch to the "Terminal settings" (third from the top left), and tick "Implicit CR in every LF", as well
       as set to Force off both Local echo and Local line editing.
-   e) After pressing the Open button, the putty console will pop up. 
-4. To enable configuration of the wlan module, quickly type "$$$" in the putty console, then a ">" character 
-   will show up indicating that the device is in config mode
-5. 
+   e) After pressing the Open button, the putty console shall pop up. 
+4. Configuring the wlan module on putty
+   a) To enable configuration of the wlan module, quickly type "$$$" in the putty console, then a ">" character
+      will show up indicating that the device is in config mode
+   b) Type "set wlan.ssid YOUR_NETWORK_NAME" to set the network name
+   c) Type "set wlan.passkey YOUR_NETWORK_PASSKEY" to set the password of your network
+   e) Type "set wlan.auto_join.enabled true" to enable auto joining the network
+   f) ##### This step is important ###### Type ""
+   d) Type "save" to save the settings
+   e) Type "reboot" to reboot the module
 2.	The Baudrate of the module is 12M (please also notice that the pushbot's Baudrate is 4M)
 3.	Set up Wlan username, password
 4.	Reset baudrate to 4MHz (consistent with pushbot baudrate)
