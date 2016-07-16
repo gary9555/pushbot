@@ -26,14 +26,26 @@ Configuration procedure for the module:
    b) Type "set wlan.ssid YOUR_NETWORK_NAME" to set the network name
    c) Type "set wlan.passkey YOUR_NETWORK_PASSKEY" to set the password of your network
    e) Type "set wlan.auto_join.enabled true" to enable auto joining the network
-   f) ##### This step is important ###### Type "set uart.baud 1 4000000 raw" to set the baudrate to 4M, so the 
+   f) ##### This step is very important ###### Type "set uart.baud 1 4000000 raw" to set the baudrate to 4M, so the 
       next time you connect the module via serial, remember to set the baudrate to 4M instead of 12M
    g) Type "set bus.mode stream" to enable the module to stream data from the pushbot
-   h) Type "get wlam.mac", and the mac address of the module will show up, please note it down because it will 
-      be used in the later steps
+   h) Type "get wlam.mac", and the mac address of the module will show up, please note it down because it might 
+      be used in the later steps when we want to find it's allocated IP address
    i) Type "save" to save the settings
    j) Type "reboot" to reboot the module
    
-5.	To configure via tcp (the Telnet function on putty), port number 56001
+5. We can also configure the wlan module via tcp (the Telnet function on putty) after we get the mac address of
+   the module in the previous step
+   a) Connect the module to serial port again just like in step 3(remember to set the baudrate to 4M instead of
+      12M because we have reset it in the previous step), it shall automatically connect to the previously set 
+      network.
+   b) Quickly type "$$$" in the putty console to enter command mode
+   c) Type "get wlan.network.ip" to get the IPv4 address of the module allocated by the network
+   d) Close the serial port, but keep the module powered on
+   e) Now that we know the IP address, we can connect to the module via telnet
+   f) Open putty again and choose the Connection Type as "Telnet"
+   g) Enter the IP address of the module we just got, and the port number 56001, then press "Open", and the PC
+      should be able to communicate to the module via tcp now
+   
 
 6.	To communicate with pushbot, port number 56000
