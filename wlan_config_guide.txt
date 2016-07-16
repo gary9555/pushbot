@@ -1,32 +1,38 @@
-This is a brief guide for configuring the WLAN module (ACKme AMW004) used for the pushbot
-
-We had quite a hard time trying to make the module work (and it currently still half-working), so here’s a 
-brief configuration guide for this specific WLAN module, hopefully it saves time for someone who uses it in the future.
+########## This is a guide for configuring the WLAN module (ACKme AMW004) used for the pushbot ###########
+# Author: Gary Wen
+# Remarks: We had quite a hard time trying to make the module work (and it currently still half-working), so here’s a 
+  brief configuration guide for this specific WLAN module, hopefully it saves time for someone who uses it in the future.
  
 Configuration procedure for the module:
 1.	!!!!!Configuration via serial port only works in windows!!!!!! 
+
 2. Download putty: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
+
 3. Connecting the wlan module to PC
    a) Connect the wlan module to the PC via a serial module, then open Putty 
    b) In the "Session settings" (top left), change the Connection type to "Serial" and then write the correct 
-   COM port into the Serial line textbox, and set the Speed to 12000000(12M). 
+   COM port into the Serial line textbox, and set the Speed to 12000000(12M)(if doesn't work, try 115200). 
    c) Switch to the Serial settings (bottom left) and verify that they match what you just entered. Further, 
       change Flow control to "RTS   /CTS" (i.e. enable hardware handshaking) and ensure Data bits is 8, Stop 
       bits is 1 and Parity is None (often referred to as 8N1). 
    d) Switch to the "Terminal settings" (third from the top left), and tick "Implicit CR in every LF", as well
       as set to Force off both Local echo and Local line editing.
    e) After pressing the Open button, the putty console shall pop up. 
+   
 4. Configuring the wlan module on putty
    a) To enable configuration of the wlan module, quickly type "$$$" in the putty console, then a ">" character
-      will show up indicating that the device is in config mode
+      will show up indicating that the device is in command mode
    b) Type "set wlan.ssid YOUR_NETWORK_NAME" to set the network name
    c) Type "set wlan.passkey YOUR_NETWORK_PASSKEY" to set the password of your network
    e) Type "set wlan.auto_join.enabled true" to enable auto joining the network
-   f) ##### This step is important ###### Type ""
-   d) Type "save" to save the settings
-   e) Type "reboot" to reboot the module
-2.	The Baudrate of the module is 12M (please also notice that the pushbot's Baudrate is 4M)
-3.	Set up Wlan username, password
-4.	Reset baudrate to 4MHz (consistent with pushbot baudrate)
+   f) ##### This step is important ###### Type "set uart.baud 1 4000000 raw" to set the baudrate to 4M, so the 
+      next time you connect the module via serial, remember to set the baudrate to 4M instead of 12M
+   g) Type "set bus.mode stream" to enable the module to stream data from the pushbot
+   h) Type "get wlam.mac", and the mac address of the module will show up, please note it down because it will 
+      be used in the later steps
+   i) Type "save" to save the settings
+   j) Type "reboot" to reboot the module
+   
 5.	To configure via tcp (the Telnet function on putty), port number 56001
+
 6.	To communicate with pushbot, port number 56000
