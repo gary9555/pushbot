@@ -60,3 +60,7 @@ Configuration procedure for the module:
       for communicating with the pushbot)
       
 After all these tedious steps, we can finally communicate and control the pushbot through wifi!
+
+### If the guide still doesn't work, please browse the ZentriOS website documentation for further referece:
+    https://docs.zentri.com/wifi/cmd/latest/commands
+    https://docs.zentri.com/wifi/cmd/latest/variables
