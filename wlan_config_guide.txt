@@ -5,6 +5,10 @@ We had quite a hard time trying to make the module work (and it currently still 
 Configuration procedure for the module:
 1.	!!!!!Configuration via serial port is only available in windows!!!!!!
 2. Download putty: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
+3. Connecting and Configuring the module on PC
+   a) Connect the wlan module to the PC via a serial module, then open Putty 
+   b) In the Session settings (top left), change the Connection type to Serial and then write the correct COM port (in our case COM3) into the Serial line textbox, and set the Speed to 12000000. Then switch to the Serial settings (bottom left) and verify that they match what you just entered. Further, change Flow control to RTS/CTS (i.e. enable hardware handshaking) and ensure Data bits is 8, Stop bits is 1 and Parity is None (often referred to as 8N1). Then switch to the Terminal settings (third from the top left), and tick Implicit CR in every LF, as well as set to Force off both Local echo and Local line editing.
+After pressing the Open button, you’ll be able to send commands to the device. The list of commands is available in the next section.
 2.	The Baudrate of the module is 12M (please also notice that the pushbot's Baudrate is 4M)
 3.	Set up Wlan username, password
 4.	Reset baudrate to 4MHz (consistent with pushbot baudrate)
