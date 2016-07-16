@@ -2,7 +2,9 @@
 # Author: Gary Wen
 # Remarks: We had quite a hard time trying to configure the module to work (and it's currently still half-working), so to 
   make up for the lack of documentation on this, I've written up a brief configuration guide for this specific WLAN module, 
-  hopefully it saves time for someone who uses it in the future.
+  hopefully it saves time for someone who uses it in the future. 
+# Thanks to Enea, Greg and Federico for helping in configuring the module, and thanks to Andreas and Julian for providing
+  a lot of instructions during the process
  
 Configuration procedure for the module:
 1.	!!!!!Configuration via serial port only works in windows!!!!!! 
@@ -35,9 +37,9 @@ Configuration procedure for the module:
    j) Type "reboot" to reboot the module
    
 5. We can also configure the wlan module via tcp (the Telnet function on putty) after we get the mac address of
-   the module in the previous step
-   a) Connect the module to serial port again just like in step 3(remember to set the baudrate to 4M instead of
-      12M because we have reset it in the previous step), it shall automatically connect to the previously set 
+   the module in the previous section
+   a) Connect the module to serial port again just like in section 3(remember to set the baudrate to 4M instead of
+      12M because we have reset it in the previous section), it shall automatically connect to the previously set 
       network.
    b) Quickly type "$$$" in the putty console to enter command mode
    c) Type "get wlan.network.ip" to get the IPv4 address of the module allocated by the network
@@ -46,6 +48,15 @@ Configuration procedure for the module:
    f) Open putty again and choose the Connection Type as "Telnet"
    g) Enter the IP address of the module we just got, and the port number 56001, then press "Open", and the PC
       should be able to communicate to the module via tcp now
+   h) ##### Alternatively, we can also fetch the IP address by using netscaning tools(e.g. "arp-scan" on linux 
+      and MAC OS) and look for the respective mac address of the wlan module
    
-
-6.	To communicate with pushbot, port number 56000
+6.	Communicating with the pushbot via wifi
+   a) Now we can mount the wlan module directly on the pushbot
+   b) The pushbot's serial port doesn't open automatically(which is the problem whose solution I haven't 
+      figured out yet), so we have to manually open it's serial port and keep it open
+   c) Use telnet on putty to connect to the same address as we acquired during the last section, and PLEASE!!!
+      NOTE!!!THAT!!! the port number should be set to 56000(56001 is for configuring the wlan module, 56000 is
+      for communicating with the pushbot)
+      
+After all these tedious steps, we can finally communicate and control the pushbot through wifi!
