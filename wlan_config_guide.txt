@@ -1,0 +1,9 @@
+i.	We had quite a hard time trying to make the module work (and it currently still half-working), so here’s a brief configuration guide for this specific WLAN module, hopefully it saves time for someone who uses it in the future.
+ 
+Configuration procedure for the module:
+1.	Configuration via serial port is only available in windows!!!
+2.	Baudrate 12M
+3.	Set up Wlan username, password
+4.	Reset baudrate to 4MHz (consistent with pushbot baudrate)
+5.	To configure via tcp (the Telnet function on putty), port number 56001
+6.	To communicate with pushbot, port number 56000
