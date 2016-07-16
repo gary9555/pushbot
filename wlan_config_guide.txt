@@ -7,7 +7,7 @@
   a lot of instructions during the process
  
 Configuration procedure for the module:
-1.	!!!!!Configuration via serial port only works in windows!!!!!! 
+1.	!!!!!Configuration via serial port only works on windows!!!!!! 
 
 2. Download putty: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
 
