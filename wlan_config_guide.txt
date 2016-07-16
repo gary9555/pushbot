@@ -4,7 +4,7 @@ We had quite a hard time trying to make the module work (and it currently still 
  
 Configuration procedure for the module:
 1.	!!!!!Configuration via serial port is only available in windows!!!!!!
-2. Download putty http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
+2. Download putty: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
 2.	The Baudrate of the module is 12M (please also notice that the pushbot's Baudrate is 4M)
 3.	Set up Wlan username, password
 4.	Reset baudrate to 4MHz (consistent with pushbot baudrate)
