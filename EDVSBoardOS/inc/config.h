@@ -50,7 +50,7 @@
  * The default baud rate at power up or after reset.
  * It can be changed afterwards through a UART command.
  */
-#define BAUD_RATE_DEFAULT		(4000000)
+#define BAUD_RATE_DEFAULT		(12000000)
 
 /**
  * Current Software versions
