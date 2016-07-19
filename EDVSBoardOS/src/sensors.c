@@ -26,6 +26,14 @@
 #define MOTOR_DRIVER_CURRENT2_SENSOR_PORT	(4)
 #define MOTOR_DRIVER_CURRENT2_SENSOR_PIN	(3)
 
+#define ADC0_CHANNEL						(2)
+#define ADC1_CHANNEL						(3)
+#define ADC2_CHANNEL						(4)
+#define ADC3_CHANNEL						(5)
+#define ADC4_CHANNEL						(6)
+#define ADC5_CHANNEL						(7)
+
+
 uint32_t sensorsEnabledCounter;
 struct sensorTimer sensorsTimers[MAX_SENSORS];
 volatile uint8_t sensorRefreshRequested;
@@ -55,11 +63,12 @@ uint16_t right0[BUFFER_MAX_SIZE];
 uint16_t left1[BUFFER_MAX_SIZE];
 uint16_t right1[BUFFER_MAX_SIZE];
 #endif
-extern const int8_t lag_limit;
+extern const int16_t lag_limit;
 uint16_t buf_length = 0;
 uint8_t buf_flag = 0;  // indicating whether buffer0 or buffer 1 is used
 int8_t process_flag = -1;  // flag for processing the buf data
 
+uint8_t stream_adc_flag = 0;  // flag for sending adc through serial towards matlab
 
 /**
  * The Systick handler is used for a lot more tasks than sensor timing.
@@ -68,6 +77,8 @@ int8_t process_flag = -1;  // flag for processing the buf data
  */
 void SysTick_Handler(void) {  // now the systick handler function is called every 1/50000 second
 	static uint16_t second_timer = 0;
+	static uint16_t data_left = 0;
+	static uint16_t data_right = 0;
 	static uint32_t debug_timer = 0;
 	//static uint16_t data0,data1;
 #if USE_PUSHBOT
@@ -138,17 +149,28 @@ void SysTick_Handler(void) {  // now the systick handler function is called ever
 		second_timer = 0;
 		toggleLed0 = 1;
 	}
-
+	// send left&right channel adc values through serial
+	if(++debug_timer >= 1000){
+		debug_timer = 0;
+		if(stream_adc_flag){
+			if (Chip_ADC_ReadValue(LPC_ADC1, ADC1_CHANNEL, &data_left) == SUCCESS){
+				if (Chip_ADC_ReadValue(LPC_ADC1, ADC5_CHANNEL, &data_right) == SUCCESS){
+					xprintf("L%uR%u\r\n", data_left, data_right);
+				}
+			}
+		}
+	}
+/*
 	//GET adc value every 1/50000 second
 	// only when both channels successfully get the data that we increase the buf length
-	if(++debug_timer >= 1000){
+	//if(++debug_timer >= 100){
 		//xputs("1\n");
-		debug_timer = 0;
+		//debug_timer = 0;
 		if(!buf_flag){
 			//xputs("22\n");
-			if(Chip_ADC_ReadValue(LPC_ADC1, 6, &left0[buf_length]) == SUCCESS){  // &left0[buf_length].real
+			if(Chip_ADC_ReadValue(LPC_ADC1, ADC1_CHANNEL, &left0[buf_length]) == SUCCESS){  // &left0[buf_length].real
 				//xputs("in1\n");
-				if(Chip_ADC_ReadValue(LPC_ADC1, 7, &right0[buf_length]) == SUCCESS){
+				if(Chip_ADC_ReadValue(LPC_ADC1, ADC5_CHANNEL, &right0[buf_length]) == SUCCESS){
 					//xprintf("   %d\n", data0);
 					//left0[buf_length].real = data0;
 					//right0[buf_length].real = data1;
@@ -163,9 +185,9 @@ void SysTick_Handler(void) {  // now the systick handler function is called ever
 			}
 		}else{
 			//xputs("333\n");
-			if(Chip_ADC_ReadValue(LPC_ADC1, 6, &left1[buf_length]) == SUCCESS){
+			if(Chip_ADC_ReadValue(LPC_ADC1, ADC1_CHANNEL, &left1[buf_length]) == SUCCESS){
 				//xputs("in2\n");
-				if(Chip_ADC_ReadValue(LPC_ADC1, 7, &right1[buf_length]) == SUCCESS){
+				if(Chip_ADC_ReadValue(LPC_ADC1, ADC5_CHANNEL, &right1[buf_length]) == SUCCESS){
 					//xprintf("   %d\n", data0);
 					//left1[buf_length].real = data0;
 					//right1[buf_length].real = data1;
@@ -178,7 +200,10 @@ void SysTick_Handler(void) {  // now the systick handler function is called ever
 				}
 			}
 		}
-	}
+	//}
+	 */
+
+
 	/*
 	for (int i = 0; i < sensorsEnabledCounter; ++i) {
 		if (--enabledSensors[i]->counter == 0) {
@@ -342,8 +367,8 @@ void sensorsInit(void) {
 	sensorsTimers[EVENT_RATE].refresh = EventCountReport;
 
 	// initialize channel 4 and 5 for the microphone values
-	ADC4Init();
-	ADC5Init();
+	ADC1Init(); // left
+	ADC5Init(); // right
 
 	//uint32_t load = Chip_Clock_GetRate(CLK_MX_MXCORE) / 1000 - 1;
 	uint32_t load = Chip_Clock_GetRate(CLK_MX_MXCORE) / ADC_FREQ - 1;
