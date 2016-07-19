@@ -138,7 +138,8 @@ static void readFromMpl(uint8_t sensorId) {
 	}
 	case HEADING: {
 		inv_get_sensor_type_heading(data, &accuracy, &timestamp);
-		xprintf(" %X\n", data[0]);
+		//xprintf(" %X\n", data[0]);
+		xprintf(" %d\n", data[0]/65536);
 		break;
 	}
 	case LINEAR_ACCEL: {
