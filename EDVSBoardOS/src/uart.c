@@ -200,6 +200,7 @@ static void UARTShowUsage(void) {
 	UARTReturn();
 
 	xputs(" ??                    - display (this) help menu\n");
+	xputs(" !C                  - start transmitting adc data\n");
 	UARTReturn();
 }
 
@@ -405,6 +406,20 @@ static void UARTParseSetCommand(void) {
 		DVS128BiasSet(biasID, biasValue);
 		if ((eDVSProcessingMode == 0) && (enableUARTecho > 1)) {
 			xprintf("-B%d=%d\n", biasID, DVS128BiasGet(biasID));
+		}
+		return;
+	}
+
+	case 'C':
+	case 'c': {
+		unsigned char *c = commandLine + 2;
+		if(*c == '+'){
+			stream_adc_flag = 1;
+			return;
+		}
+		if(*c == '-'){
+			stream_adc_flag = 0;
+			return;
 		}
 		return;
 	}
