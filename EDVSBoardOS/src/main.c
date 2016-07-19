@@ -41,7 +41,8 @@ int main(void) {
 	uint32_t timeStampMemory = 0, timeStampDelta = 0;
 #endif
 
-	int8_t angle = 0;
+	int16_t angle = 0;
+	uint32_t cnt =0;
 
 	ExtraPinsInit();
 	disablePeripherals();
@@ -103,13 +104,16 @@ int main(void) {
 		 * manipulate the proceeding direction of the pushbot
 		 */
 		// if buffer reaches a length of 1024
-		if(process_flag != -1){  // -1 for not ready, 0 for buffer0, 1 for buffer1
+	/*	if(process_flag != -1){  // -1 for not ready, 0 for buffer0, 1 for buffer1
 		//	SysTick->CTRL &= ~0x1;
 			//xprintf("%d\n", process_flag);
 			angle = itd();
 			//SysTick->CTRL |= 0x1;
-			xprintf("%d\n", angle*57);
-		}
+			if(++cnt>150){
+				xprintf("angle = %d\n", angle);
+				cnt = 0;
+			}
+		}*/
 
 
 		// start doing math
