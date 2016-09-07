@@ -1,1 +1,28 @@
+Brief user guide for pushbot maneuver
+
+This is a short guide for anyone who wants to use the pushbot platform to quickly get familiar with its firmware interface. 
+
+1.	The pushbot firmware is single threaded.
+
+2.	Controlling through serial commands: 
+Pushbot itself has a predefined set of commands that enables it to read external commands and react to it. For directional movement, the command is “!m[0/1]=%[pwn percentage]”, where 0 stands for left wheel and 1 stands for right wheel. You have to specify the pwm percentage of the left and right wheel, e.g. if we want the robot to move forward with 50% full speed, the the commands should be “!m0=%50” followed by “!m1=%50”, and so on for othe directions. Notice that the pwn percentage can be specified as negative when a backward movement is desired. 
+If you feel the need to extend the command set of the pushbot, uart.c is the file the takes care of this. It’s located in the following path:
+/EDVSBoardOS/src/uart.c
+
+3.	Systick Interrupt handling for onboard sensors: 
+Sensor values readings are scheduled by the interrupt handler in sensors.c. 
+The “Systick” variable is initialized in the function “sensorsInit()”. Every time Systick’s value goes to zero, and interrupt is issued and the “SysTick_Handler” function is called. Thus if a different rate of interrupt is desired, change the “Systick->LOAD” value.
+Please be aware that if the load value of Systick is changed, the timer variables in Systick_Handler should also be modified respectively. 
+The file is under the following path:
+/EDVSBoardOS/src/sensors.c
+
+4.	ITD functions:
+Two methods for itd calculation are implemented, including time domain cross correlation and cross spectrum correlation. 
+/EDVSBoardOS/src/itd.c
+
+5.	Changing motor duty cycle:
+Can update the motor duty cycle by directly calling the function 
+“updateMotorDutyCycle(uint32_t motor, int32_t duty_cycle)” defined in motor.c, where the parameter “duty_cycle” can be an int between -100 and +100.
+/EDVSBoardOS/src/motor.c
+
 
