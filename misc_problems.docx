@@ -1,1 +1,12 @@
+						Miscellaneous problems documentation
+--- To the person (if any) who continues the project, please feel free to add any complementary information or new problems you encountered to this file.
+
+1.	Linux supports a serial transmission baudrate up to only 4MHz, while windows is able to work with a rate up to (at least) 12MHz. Thus when you tend to raise the data transmission rate of the device or if you are configuring the wlan module which (possibly) has a default baudrate of 12MHz, please use windows.
+
+2.	We had quite a hard time trying to make the module work (and it’s currently still half-working), so to make up for the lack of documentation, I’ve written up a brief configuration guide for this specific WLAN module, hopefully it saves time for someone who might use it in the future.
+https://github.com/gary9555/pushbot/blob/master/wlan_config_guide.txt
+
+3.	If you’re trying to flash new firmware to the pushbot, besides the hardware problem mentioned on the eDVS webpage (that you need to connect two certain pins together before pressing the reset button), please also detach the eDVS board from the pushbot body since the voltage on latter will interfere with the eDVS programming interface causing errors.
+
+
 
